@@ -32,6 +32,9 @@ class MetadataTypeParser {
     ];
 
     this.innerXMLHeaderMap = {
+      CustomApplication: '<?xml version="1.0" encoding="UTF-8"?><CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">',
+      PermissionSetGroup: '<?xml version="1.0" encoding="UTF-8"?><PermissionSetGroup xmlns="http://soap.sforce.com/2006/04/metadata">',
+      FlexiPage: '<?xml version="1.0" encoding="UTF-8"?><FlexiPage xmlns="http://soap.sforce.com/2006/04/metadata">',
       CustomLabel: '<?xml version="1.0" encoding="UTF-8"?><CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">',
       AssignmentRule: '<?xml version="1.0" encoding="UTF-8"?><AssignmentRules xmlns="http://soap.sforce.com/2006/04/metadata">',
       AutoResponseRule: '<?xml version="1.0" encoding="UTF-8"?><AutoResponseRules xmlns="http://soap.sforce.com/2006/04/metadata">',
@@ -72,7 +75,7 @@ class MetadataTypeParser {
       SharingOwnerRule: 'SharingRules',
       EscalationRule: 'EscalationRules',
       MatchingRule: 'MatchingRules',
-      ManagedTopic: 'ManagedTopics',
+      ManagedTopic: 'ManagedTopics'
     };
 
     this.customObjectChildMap = {
@@ -98,7 +101,7 @@ class MetadataTypeParser {
       SharingOwnerRule: 'sharingOwnerRules',
       EscalationRule: 'escalationRule',
       MatchingRule: 'matchingRules',
-      ManagedTopic: 'managedTopic',
+      ManagedTopic: 'managedTopic'
     };
 
     this.functionMap = {
@@ -121,10 +124,12 @@ class MetadataTypeParser {
       LightningComponentBundle: this.getDefaultTypes,
       NamedCredential: this.getDefaultTypes,
       PermissionSet: this.getDefaultTypes,
+      PermissionSetGroup: this.getDefaultTypes,
       RemoteSiteSetting: this.getDefaultTypes,
       ReportType: this.getDefaultTypes,
       StaticResource: this.getDefaultTypes,
       BrandingSet: this.getDefaultTypes,
+      CustomApplication: this.getDefaultTypes,
 
       ContentAsset: this.getDefaultTypes,
       CustomMetadata: this.getDefaultTypes,
@@ -250,9 +255,9 @@ class MetadataTypeParser {
   // ApexClass, ApexComponent, ApexPage, ApexTrigger, AppMenu, AuraDefinitionBundle,
   // CustomObjects, CustomPermission, CustomTab, FlexiPage, Flow, FlowDefinition, GlobalValueSet,
   // HomePageLayout, IframeWhiteListUrlSettings, Layout, LightningComponentBundle, NamedCredential,
-  // PermissionSet, RemoteSiteSetting, ReportType, Workflow, ApexTestSuite, StandardValueSet, Settings,
+  // PermissionSet, PermissionSetGroup, RemoteSiteSetting, ReportType, Workflow, ApexTestSuite, StandardValueSet, Settings,
   // Role, QuickAction, Queue, PathAssistant, CustomObjectTranslation, CustomNotificationType,
-  // LightningExperienceTheme, Group, CustomMetadata, ContentAsset
+  // LightningExperienceTheme, Group, CustomMetadata, ContentAsset, CustomApplication
   getDefaultTypes(type, folderContentList, folderType){
     const typePath = `${this.projectPath}/${this.packageName}/${folderType}`;
     type.componentList.forEach((component) => {
