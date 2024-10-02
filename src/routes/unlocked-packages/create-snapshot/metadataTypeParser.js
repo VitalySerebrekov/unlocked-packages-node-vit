@@ -201,6 +201,11 @@ class MetadataTypeParser {
       // const folderTypePath = `${this.projectPath}/${packageNameFolder}/${folderType}`;
 
       const folderTypePath = `${this.projectPath}/${this.packageName}/${folderType}`;
+
+      this.log.log('this.projectPath ' + this.projectPath);
+      this.log.log('this.packageName ' + this.packageName);
+      this.log.log('folderType ' + folderType);
+
       if (folderType && fs.existsSync(folderTypePath)) {
         const folderContentList = fs.readdirSync(folderTypePath, { withFileTypes: true });
         if (this.functionMap[type.type]) {
