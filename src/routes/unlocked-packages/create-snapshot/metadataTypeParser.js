@@ -196,11 +196,11 @@ class MetadataTypeParser {
     Object.values(this.packageTypeMap).forEach((type) => {
       const folderType = constants.METADATA_FOLDER_TYPE_MAP[type.type];
 
-      let packageNameFolder = this.packageName.replaceAll(/\//g, "-");
-      this.log.log('packageNameFolder11 ' + packageNameFolder);
-      const folderTypePath = `${this.projectPath}/${packageNameFolder}/${folderType}`;
+      // let packageNameFolder = this.packageName.replaceAll(/\//g, "-");
+      // this.log.log('packageNameFolder11 ' + packageNameFolder);
+      // const folderTypePath = `${this.projectPath}/${packageNameFolder}/${folderType}`;
 
-      // const folderTypePath = `${this.projectPath}/${this.packageName}/${folderType}`;
+      const folderTypePath = `${this.projectPath}/${this.packageName}/${folderType}`;
       if (folderType && fs.existsSync(folderTypePath)) {
         const folderContentList = fs.readdirSync(folderTypePath, { withFileTypes: true });
         if (this.functionMap[type.type]) {
