@@ -10,13 +10,15 @@ const { MetadataTypeParser } = require('./metadataTypeParser');
 function retrievePackages(accessToken, projectName, packageName, dependencyList, log) {
   return new Promise((resolve, reject) => {
     try {
+
+      let packageNameFolder = packageName.replaceAll(/\//g, "-");
+      log.log('packageNameFolder1 ' + packageNameFolder);
+
       log.log('Start Retrieve Packages');
       try {
 
         log.log('projectName ' + projectName);
         log.log('packageName ' + packageName);
-        let packageNameFolder = packageName.replaceAll(/\//g, "-");
-        log.log('packageNameFolder1 ' + packageNameFolder);
         fs.mkdirSync(`./${projectName}/${packageNameFolder}`);
 
         // fs.mkdirSync(`./${projectName}/${packageName}`);
