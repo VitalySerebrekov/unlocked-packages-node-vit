@@ -357,9 +357,11 @@ class MetadataTypeParser {
 
     let packageNameFolder = this.packageName.replaceAll(/\//g, "-");
     this.log.log('packageNameFolder44 ' + packageNameFolder);
-    const typePath = `${this.projectPath}/${packageNameFolder}/${folderType}`;
+    this.log.log('this.packageName44 ' + this.packageName);
 
-    // const typePath = `${this.projectPath}/${this.packageName}/${folderType}`;
+    // const typePath = `${this.projectPath}/${packageNameFolder}/${folderType}`;
+    const typePath = `${this.projectPath}/${this.packageName}/${folderType}`;
+    console.log('typePath44 ' + typePath);
     const prepareObjectMap = {};
     folderContentList.forEach((content) => {
       type.componentList.forEach((component) => {
