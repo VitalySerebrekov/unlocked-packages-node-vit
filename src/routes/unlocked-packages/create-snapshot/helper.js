@@ -28,12 +28,20 @@ function retrievePackages(accessToken, projectName, packageName, dependencyList,
       promiseChain = promiseChain
         .then(() => {
           log.log('Start Retrieve Package ' + packageName);
+
           return childProcess.call(
             constants.getSFDXRetrievePackage(accessToken, packageName),
             log,
-            { cwd: `./${projectName}/${packageName}`,
+            { cwd: `./${projectName}/${packageNameFolder}`,
               maxBuffer: 1024 * 500
             })
+
+          // return childProcess.call(
+          //   constants.getSFDXRetrievePackage(accessToken, packageName),
+          //   log,
+          //   { cwd: `./${projectName}/${packageName}`,
+          //     maxBuffer: 1024 * 500
+          //   })
         })
         .then(() => log.log('End Retrieve Package ' + packageName));
 
