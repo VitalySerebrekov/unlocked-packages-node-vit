@@ -299,9 +299,10 @@ class MetadataTypeParser {
       });
     });
     this.log.log('111 getDefaultTypes middle ' + folderType);
+    console.log('111 getDefaultTypes componentList: ', this.componentList);
     type.componentList.forEach((component) => {
                                               console.log('222 getDefaultTypes component: ', component);
-                                              console.log('222 getDefaultTypes componentList: ', componentList);
+                                              console.log('222 getDefaultTypes componentList: ', this.componentList);
       this.componentList.push(component);
       this.count++;
       component.fileList.forEach((file) => {
