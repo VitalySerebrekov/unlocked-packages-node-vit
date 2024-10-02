@@ -318,9 +318,9 @@ class MetadataTypeParser {
                                               this.log.log('337 getDefaultTypes addLocalFolder2 ' + addLocalFolder2);
                                               // const isExist1 = fs.existsSync(`${projectPath}/${packageNameFolder}/package.xml`);
                                               const isExist1 = fs.existsSync(`${typePath}/${file}`);
-                                              log.log('DDD isExist1 ' + isExist1);
+                                              console.log('DDD isExist1 ' + isExist1);
                                               const isExist2 = fs.existsSync(`${typePathCorrected}/${file}`);
-                                              log.log('DDD isExist2 ' + isExist2);
+                                              console.log('DDD isExist2 ' + isExist2);
 
 
           // this.zip.addLocalFolder(`${typePath}/${file}`, `${folderType}/${file}`);
@@ -333,9 +333,9 @@ class MetadataTypeParser {
                                               this.log.log('445 getDefaultTypes addLocalFile1 ' + addLocalFile1);
                                               this.log.log('447 getDefaultTypes addLocalFile2 ' + addLocalFile2);
                                               const isExist1 = fs.existsSync(`${typePath}/${file}`);
-                                              log.log('GGG isExist1 ' + isExist1);
+                                              console.log('GGG isExist1 ' + isExist1);
                                               const isExist2 = fs.existsSync(`${typePathCorrected}/${file}`);
-                                              log.log('GGG isExist2 ' + isExist2);
+                                              console.log('GGG isExist2 ' + isExist2);
 
           // this.zip.addLocalFile(`${typePath}/${file}`, folderType);
           this.zip.addLocalFile(`${typePathCorrected}/${file}`, folderType);
@@ -345,7 +345,7 @@ class MetadataTypeParser {
       delete component.isDirectory;
       delete component.fileList;
     });
-    this.log.log('111 getDefaultTypes end ' + folderType);
+    this.log.log('881 getDefaultTypes end ' + folderType);
   }
 
   // CustomField, ListView, ValidationRule, WebLink
