@@ -337,8 +337,8 @@ class MetadataTypeParser {
                                               const isExist2 = fs.existsSync(`${typePathCorrected}/${file}`);
                                               console.log('GGG isExist2 ' + isExist2);
 
-          // this.zip.addLocalFile(`${typePath}/${file}`, folderType);
-          this.zip.addLocalFile(`${typePathCorrected}/${file}`, folderType);
+          this.zip.addLocalFile(`${typePath}/${file}`, folderType);
+          // this.zip.addLocalFile(`${typePathCorrected}/${file}`, folderType);
         }
       });
       this.updateChunkList(type);
