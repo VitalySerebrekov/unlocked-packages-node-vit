@@ -302,26 +302,41 @@ class MetadataTypeParser {
     this.log.log('111 getDefaultTypes middle ' + folderType);
     console.log('111 getDefaultTypes componentList: ', this.componentList);
     type.componentList.forEach((component) => {
-                                              console.log('222 getDefaultTypes component: ', component);
-                                              console.log('222 getDefaultTypes componentList: ', this.componentList);
+                                              console.log('224 getDefaultTypes component: ', component);
+                                              console.log('226 getDefaultTypes componentList: ', this.componentList);
       this.componentList.push(component);
       this.count++;
       component.fileList.forEach((file) => {
         this.size += fs.statSync(`${typePath}/${file}`).size;
         if (component.isDirectory) {
                                               // let addLocalFolder1 = `${typePath}/${file}`;
+                                              let addLocalFolder0 = `${typePath}/${file}`;
                                               let addLocalFolder1 = `${typePathCorrected}/${file}`;
                                               let addLocalFolder2 = `${folderType}/${file}`;
-                                              this.log.log('333 getDefaultTypes addLocalFolder1 ' + addLocalFolder1);
-                                              this.log.log('333 getDefaultTypes addLocalFolder2 ' + addLocalFolder2);
+                                              this.log.log('333 getDefaultTypes addLocalFolder0 ' + addLocalFolder0);
+                                              this.log.log('335 getDefaultTypes addLocalFolder1 ' + addLocalFolder1);
+                                              this.log.log('337 getDefaultTypes addLocalFolder2 ' + addLocalFolder2);
+                                              // const isExist1 = fs.existsSync(`${projectPath}/${packageNameFolder}/package.xml`);
+                                              const isExist1 = fs.existsSync(`${typePath}/${file}`);
+                                              log.log('DDD isExist1 ' + isExist1);
+                                              const isExist2 = fs.existsSync(`${typePathCorrected}/${file}`);
+                                              log.log('DDD isExist2 ' + isExist2);
+
+
           // this.zip.addLocalFolder(`${typePath}/${file}`, `${folderType}/${file}`);
           this.zip.addLocalFolder(`${typePathCorrected}/${file}`, `${folderType}/${file}`);
         } else {
-                                              // let addLocalFile1 = `${typePath}/${file}`;
+                                              let addLocalFile0 = `${typePath}/${file}`;
                                               let addLocalFile1 = `${typePathCorrected}/${file}`;
                                               let addLocalFile2 = folderType;
-                                              this.log.log('444 getDefaultTypes addLocalFile1 ' + addLocalFile1);
-                                              this.log.log('444 getDefaultTypes addLocalFile2 ' + addLocalFile2);
+                                              this.log.log('443 getDefaultTypes addLocalFile0 ' + addLocalFile0);
+                                              this.log.log('445 getDefaultTypes addLocalFile1 ' + addLocalFile1);
+                                              this.log.log('447 getDefaultTypes addLocalFile2 ' + addLocalFile2);
+                                              const isExist1 = fs.existsSync(`${typePath}/${file}`);
+                                              log.log('GGG isExist1 ' + isExist1);
+                                              const isExist2 = fs.existsSync(`${typePathCorrected}/${file}`);
+                                              log.log('GGG isExist2 ' + isExist2);
+
           // this.zip.addLocalFile(`${typePath}/${file}`, folderType);
           this.zip.addLocalFile(`${typePathCorrected}/${file}`, folderType);
         }
