@@ -275,14 +275,14 @@ class MetadataTypeParser {
   // LightningExperienceTheme, Group, CustomMetadata, ContentAsset, CustomApplication
   getDefaultTypes(type, folderContentList, folderType){
 
-    this.log.log('111 getDefaultTypes type ' + type);
-    this.log.log('111 getDefaultTypes folderContentList ' + folderContentList);
-    this.log.log('111 getDefaultTypes folderType ' + folderType);
+    console.log('111 getDefaultTypes type: ', type);
+    console.log('111 getDefaultTypes folderContentList: ', folderContentList);
+    console.log('111 getDefaultTypes folderType: ', folderType);
 
     let packageNameFolder = this.packageName.replaceAll(/\//g, "-");
-    this.log.log('packageNameFolder33 ' + packageNameFolder);
+    console.log('packageNameFolder33 ' + packageNameFolder);
     const typePath = `${this.projectPath}/${this.packageNameFolder}/${folderType}`;
-    this.log.log('111 getDefaultTypes typePath ', typePath);
+    console.log('111 getDefaultTypes typePath ', typePath);
     // const typePath = `${this.projectPath}/${this.packageName}/${folderType}`;
     type.componentList.forEach((component) => {
       folderContentList.forEach((content) => {
@@ -300,9 +300,8 @@ class MetadataTypeParser {
     });
     this.log.log('111 getDefaultTypes middle ' + folderType);
     type.componentList.forEach((component) => {
-      this.log.log('222 getDefaultTypes component ' + component);
-      console.log('222 getDefaultTypes component: ', component);
-      console.log('222 getDefaultTypes componentList: ', componentList);
+                                              console.log('222 getDefaultTypes component: ', component);
+                                              console.log('222 getDefaultTypes componentList: ', componentList);
       this.componentList.push(component);
       this.count++;
       component.fileList.forEach((file) => {
