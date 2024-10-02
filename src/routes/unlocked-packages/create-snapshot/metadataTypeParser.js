@@ -281,9 +281,10 @@ class MetadataTypeParser {
 
     let packageNameFolder = this.packageName.replaceAll(/\//g, "-");
     console.log('packageNameFolder33 ' + packageNameFolder);
-    const typePath = `${this.projectPath}/${packageNameFolder}/${folderType}`;
+    const typePathCorrected = `${this.projectPath}/${packageNameFolder}/${folderType}`;
+    const typePath = `${this.projectPath}/${this.packageName}/${folderType}`;
     console.log('111 getDefaultTypes typePath ', typePath);
-    // const typePath = `${this.projectPath}/${this.packageName}/${folderType}`;
+    console.log('111 getDefaultTypes typePathCorrected ', typePathCorrected);
     type.componentList.forEach((component) => {
       folderContentList.forEach((content) => {
         const objectExtend = path.parse(content.name)
@@ -308,17 +309,21 @@ class MetadataTypeParser {
       component.fileList.forEach((file) => {
         this.size += fs.statSync(`${typePath}/${file}`).size;
         if (component.isDirectory) {
-                                              let addLocalFolder1 = `${typePath}/${file}`;
+                                              // let addLocalFolder1 = `${typePath}/${file}`;
+                                              let addLocalFolder1 = `${typePathCorrected}/${file}`;
                                               let addLocalFolder2 = `${folderType}/${file}`;
                                               this.log.log('333 getDefaultTypes addLocalFolder1 ' + addLocalFolder1);
                                               this.log.log('333 getDefaultTypes addLocalFolder2 ' + addLocalFolder2);
-          this.zip.addLocalFolder(`${typePath}/${file}`, `${folderType}/${file}`);
+          // this.zip.addLocalFolder(`${typePath}/${file}`, `${folderType}/${file}`);
+          this.zip.addLocalFolder(`${typePathCorrected}/${file}`, `${folderType}/${file}`);
         } else {
-                                              let addLocalFile1 = `${typePath}/${file}`;
+                                              // let addLocalFile1 = `${typePath}/${file}`;
+                                              let addLocalFile1 = `${typePathCorrected}/${file}`;
                                               let addLocalFile2 = folderType;
                                               this.log.log('444 getDefaultTypes addLocalFile1 ' + addLocalFile1);
                                               this.log.log('444 getDefaultTypes addLocalFile2 ' + addLocalFile2);
-          this.zip.addLocalFile(`${typePath}/${file}`, folderType);
+          // this.zip.addLocalFile(`${typePath}/${file}`, folderType);
+          this.zip.addLocalFile(`${typePathCorrected}/${file}`, folderType);
         }
       });
       this.updateChunkList(type);
