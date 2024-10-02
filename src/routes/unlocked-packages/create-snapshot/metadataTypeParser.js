@@ -197,7 +197,7 @@ class MetadataTypeParser {
       const folderType = constants.METADATA_FOLDER_TYPE_MAP[type.type];
 
       let packageNameFolder = this.packageName.replaceAll(/\//g, "-");
-      log.log('packageNameFolder11 ' + packageNameFolder);
+      this.log.log('packageNameFolder11 ' + packageNameFolder);
       const folderTypePath = `${this.projectPath}/${packageNameFolder}/${folderType}`;
 
       // const folderTypePath = `${this.projectPath}/${this.packageName}/${folderType}`;

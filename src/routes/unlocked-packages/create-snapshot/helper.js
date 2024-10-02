@@ -125,15 +125,8 @@ function getComponentTypesFromPackageXML(projectPath, packageName, dependencyLis
       dependencyList.push(packageName);
       for (const packName of dependencyList) {
 
-        // let packageNameFolder = packName.replaceAll(/\//g, "-");
-        // log.log('packageNameFolder3 ' + packageNameFolder);
-
         const isExistPackageXML = fs.existsSync(`${projectPath}/${packName}/package.xml`);
         log.log('Is exist package.xml ' + isExistPackageXML);
-        // const isExist4 = fs.existsSync(`${projectPath}/OCP/BB Robo1/package.xml`);
-        // log.log('isExist4 ' + isExist4);
-
-        // const packageXML = fs.readFileSync(`${projectPath}/${packageNameFolder}/package.xml`);
 
         const packageXML = fs.readFileSync(`${projectPath}/${packName}/package.xml`);
         const packageJSON = await parser.parseStringPromise(packageXML);
