@@ -301,6 +301,8 @@ class MetadataTypeParser {
     this.log.log('111 getDefaultTypes middle ' + folderType);
     type.componentList.forEach((component) => {
       this.log.log('222 getDefaultTypes component ' + component);
+      console.log('222 getDefaultTypes component: ', component);
+      console.log('222 getDefaultTypes componentList: ', componentList);
       this.componentList.push(component);
       this.count++;
       component.fileList.forEach((file) => {
