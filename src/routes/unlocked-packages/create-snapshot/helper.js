@@ -12,8 +12,8 @@ function retrievePackages(accessToken, projectName, packageName, dependencyList,
     try {
       log.log('Start Retrieve Packages');
       try {
-        log.log('projectName ' + ${projectName});
-        log.log('packageName ' + ${packageName});
+        log.log('projectName ' + projectName);
+        log.log('packageName ' + packageName);
         fs.mkdirSync(`./${projectName}/${packageName}`);
       } catch (e) {
         log.log('Error Create Package Directory ' + e);
