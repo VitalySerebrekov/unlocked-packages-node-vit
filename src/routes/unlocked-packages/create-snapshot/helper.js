@@ -12,9 +12,14 @@ function retrievePackages(accessToken, projectName, packageName, dependencyList,
     try {
       log.log('Start Retrieve Packages');
       try {
+
         log.log('projectName ' + projectName);
         log.log('packageName ' + packageName);
-        fs.mkdirSync(`./${projectName}/${packageName}`);
+        let packageNameFolder = packageName.replaceAll(/\//g, "-");
+        log.log('packageNameFolder1 ' + packageNameFolder);
+        fs.mkdirSync(`./${projectName}/${packageNameFolder}`);
+
+        // fs.mkdirSync(`./${projectName}/${packageName}`);
       } catch (e) {
         log.log('Error Create Package Directory ' + e);
         reject(e);
@@ -65,7 +70,12 @@ function unzipPackages(projectName, packageName, dependencyList, log) {
       promiseChain = promiseChain
         .then(() => {
           log.log('Start Unzip Package ' + packageName);
-          return storage.unzip(`${projectName}/${packageName}/${constants.ZIP_PACKAGE_NAME}`, projectName, log)
+
+          let packageNameFolder = packageName.replaceAll(/\//g, "-");
+          log.log('packageNameFolder2 ' + packageNameFolder);
+          return storage.unzip(`${projectName}/${packageNameFolder}/${constants.ZIP_PACKAGE_NAME}`, projectName, log)
+
+          // return storage.unzip(`${projectName}/${packageName}/${constants.ZIP_PACKAGE_NAME}`, projectName, log)
         })
         .then(() => log.log('End Unzip Package ' + packageName));
 
@@ -104,7 +114,12 @@ function getComponentTypesFromPackageXML(projectPath, packageName, dependencyLis
       dependencyList = JSON.parse(JSON.stringify(dependencyList));
       dependencyList.push(packageName);
       for (const packName of dependencyList) {
-        const packageXML = fs.readFileSync(`${projectPath}/${packName}/package.xml`);
+
+        let packageNameFolder = packName.replaceAll(/\//g, "-");
+        log.log('packageNameFolder3 ' + packageNameFolder);
+        const packageXML = fs.readFileSync(`${projectPath}/${packageNameFolder}/package.xml`);
+
+        // const packageXML = fs.readFileSync(`${projectPath}/${packName}/package.xml`);
         const packageJSON = await parser.parseStringPromise(packageXML);
 
         if (!Array.isArray(packageJSON.Package.types)) {

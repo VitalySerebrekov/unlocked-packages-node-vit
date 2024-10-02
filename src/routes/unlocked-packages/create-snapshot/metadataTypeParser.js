@@ -195,7 +195,12 @@ class MetadataTypeParser {
     }
     Object.values(this.packageTypeMap).forEach((type) => {
       const folderType = constants.METADATA_FOLDER_TYPE_MAP[type.type];
-      const folderTypePath = `${this.projectPath}/${this.packageName}/${folderType}`;
+
+      let packageNameFolder = this.packageName.replaceAll(/\//g, "-");
+      log.log('packageNameFolder11 ' + packageNameFolder);
+      const folderTypePath = `${this.projectPath}/${packageNameFolder}/${folderType}`;
+
+      // const folderTypePath = `${this.projectPath}/${this.packageName}/${folderType}`;
       if (folderType && fs.existsSync(folderTypePath)) {
         const folderContentList = fs.readdirSync(folderTypePath, { withFileTypes: true });
         if (this.functionMap[type.type]) {
@@ -222,7 +227,12 @@ class MetadataTypeParser {
 
   //Document, EmailTemplate, Report
   getTypesFromFolder(type, folderContentList, folderType) {
-    const typePath = `${this.projectPath}/${this.packageName}/${folderType}`;
+
+    let packageNameFolder = this.packageName.replaceAll(/\//g, "-");
+    log.log('packageNameFolder22 ' + packageNameFolder);
+    const typePath = `${this.projectPath}/${this.packageNameFolder}/${folderType}`;
+
+    // const typePath = `${this.projectPath}/${this.packageName}/${folderType}`;
     type.componentList.forEach((component) => {
       const componentPathList = component.apiName.split('/');
       const componentFolder = componentPathList[0];
@@ -259,7 +269,12 @@ class MetadataTypeParser {
   // Role, QuickAction, Queue, PathAssistant, CustomObjectTranslation, CustomNotificationType,
   // LightningExperienceTheme, Group, CustomMetadata, ContentAsset, CustomApplication
   getDefaultTypes(type, folderContentList, folderType){
-    const typePath = `${this.projectPath}/${this.packageName}/${folderType}`;
+
+    let packageNameFolder = this.packageName.replaceAll(/\//g, "-");
+    log.log('packageNameFolder33 ' + packageNameFolder);
+    const typePath = `${this.projectPath}/${this.packageNameFolder}/${folderType}`;
+
+    // const typePath = `${this.projectPath}/${this.packageName}/${folderType}`;
     type.componentList.forEach((component) => {
       folderContentList.forEach((content) => {
         const objectExtend = path.parse(content.name)
@@ -299,7 +314,12 @@ class MetadataTypeParser {
       this.log.log(`Unsupported Component Type ${type.type}. Child Type Not Found.`);
       return
     }
-    const typePath = `${this.projectPath}/${this.packageName}/${folderType}`;
+
+    let packageNameFolder = this.packageName.replaceAll(/\//g, "-");
+    log.log('packageNameFolder44 ' + packageNameFolder);
+    const typePath = `${this.projectPath}/${this.packageNameFolder}/${folderType}`;
+
+    // const typePath = `${this.projectPath}/${this.packageName}/${folderType}`;
     const prepareObjectMap = {};
     folderContentList.forEach((content) => {
       type.componentList.forEach((component) => {
@@ -337,7 +357,12 @@ class MetadataTypeParser {
   }
 
   customLabelProcessor(type, folderContentList, folderType) {
-    const customLabelPath = `${this.projectPath}/${this.packageName}/${folderType}/CustomLabels.labels`;
+
+    let packageNameFolder = this.packageName.replaceAll(/\//g, "-");
+    log.log('packageNameFolder55 ' + packageNameFolder);
+    const customLabelPath = `${this.projectPath}/${this.packageNameFolder}/${folderType}/CustomLabels.labels`;
+
+    // const customLabelPath = `${this.projectPath}/${this.packageName}/${folderType}/CustomLabels.labels`;
 
     const xml = fs.readFileSync(customLabelPath)?.toString('utf8');
     const header = this.getHeader('CustomLabel');
