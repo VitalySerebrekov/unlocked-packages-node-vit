@@ -275,10 +275,14 @@ class MetadataTypeParser {
   // LightningExperienceTheme, Group, CustomMetadata, ContentAsset, CustomApplication
   getDefaultTypes(type, folderContentList, folderType){
 
+    this.log.log('111 getDefaultTypes type ', type);
+    this.log.log('111 getDefaultTypes folderContentList ', folderContentList);
+    this.log.log('111 getDefaultTypes folderType ', folderType);
+
     let packageNameFolder = this.packageName.replaceAll(/\//g, "-");
     this.log.log('packageNameFolder33 ' + packageNameFolder);
     const typePath = `${this.projectPath}/${this.packageNameFolder}/${folderType}`;
-
+    this.log.log('111 getDefaultTypes typePath ', typePath);
     // const typePath = `${this.projectPath}/${this.packageName}/${folderType}`;
     type.componentList.forEach((component) => {
       folderContentList.forEach((content) => {
@@ -294,7 +298,7 @@ class MetadataTypeParser {
         }
       });
     });
-
+    this.log.log('111 getDefaultTypes middle ', folderType);
     type.componentList.forEach((component) => {
       this.componentList.push(component);
       this.count++;
@@ -310,7 +314,7 @@ class MetadataTypeParser {
       delete component.isDirectory;
       delete component.fileList;
     });
-
+    this.log.log('111 getDefaultTypes end ', folderType);
   }
 
   // CustomField, ListView, ValidationRule, WebLink
