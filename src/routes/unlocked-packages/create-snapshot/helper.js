@@ -127,6 +127,19 @@ function getComponentTypesFromPackageXML(projectPath, packageName, dependencyLis
 
         let packageNameFolder = packName.replaceAll(/\//g, "-");
         log.log('packageNameFolder3 ' + packageNameFolder);
+
+        const isExist1 = fs.existsSync(`${projectPath}/${packageNameFolder}/package.xml`);
+        log.log('isExist1 ' + isExist1);
+        const isExist2 = fs.existsSync(`${projectPath}/${packName}/package.xml`);
+        log.log('isExist2 ' + isExist1);
+        const isExist3 = fs.existsSync(`${projectPath}/OCP/package.xml`);
+        log.log('isExist3 ' + isExist1);
+        const isExist4 = fs.existsSync(`${projectPath}/OCP/BB Robo1/package.xml`);
+        log.log('isExist4 ' + isExist1);
+        // const isExist5 = fs.existsSync(`${projectPath}/OCP/OCP/\BB Robo1package.xml`);
+        // log.log('isExist1 ' + isExist1);
+        // const isExist6 = fs.existsSync(`${projectPath}/OCP/OCP/\\BB Robo1package.xml`);
+
         const packageXML = fs.readFileSync(`${projectPath}/${packageNameFolder}/package.xml`);
 
         // const packageXML = fs.readFileSync(`${projectPath}/${packName}/package.xml`);
