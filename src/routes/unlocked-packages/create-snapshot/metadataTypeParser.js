@@ -229,7 +229,7 @@ class MetadataTypeParser {
   getTypesFromFolder(type, folderContentList, folderType) {
 
     let packageNameFolder = this.packageName.replaceAll(/\//g, "-");
-    log.log('packageNameFolder22 ' + packageNameFolder);
+    this.log.log('packageNameFolder22 ' + packageNameFolder);
     const typePath = `${this.projectPath}/${this.packageNameFolder}/${folderType}`;
 
     // const typePath = `${this.projectPath}/${this.packageName}/${folderType}`;
@@ -271,7 +271,7 @@ class MetadataTypeParser {
   getDefaultTypes(type, folderContentList, folderType){
 
     let packageNameFolder = this.packageName.replaceAll(/\//g, "-");
-    log.log('packageNameFolder33 ' + packageNameFolder);
+    this.log.log('packageNameFolder33 ' + packageNameFolder);
     const typePath = `${this.projectPath}/${this.packageNameFolder}/${folderType}`;
 
     // const typePath = `${this.projectPath}/${this.packageName}/${folderType}`;
@@ -316,7 +316,7 @@ class MetadataTypeParser {
     }
 
     let packageNameFolder = this.packageName.replaceAll(/\//g, "-");
-    log.log('packageNameFolder44 ' + packageNameFolder);
+    this.log.log('packageNameFolder44 ' + packageNameFolder);
     const typePath = `${this.projectPath}/${this.packageNameFolder}/${folderType}`;
 
     // const typePath = `${this.projectPath}/${this.packageName}/${folderType}`;
@@ -359,7 +359,7 @@ class MetadataTypeParser {
   customLabelProcessor(type, folderContentList, folderType) {
 
     let packageNameFolder = this.packageName.replaceAll(/\//g, "-");
-    log.log('packageNameFolder55 ' + packageNameFolder);
+    this.log.log('packageNameFolder55 ' + packageNameFolder);
     const customLabelPath = `${this.projectPath}/${this.packageNameFolder}/${folderType}/CustomLabels.labels`;
 
     // const customLabelPath = `${this.projectPath}/${this.packageName}/${folderType}/CustomLabels.labels`;
