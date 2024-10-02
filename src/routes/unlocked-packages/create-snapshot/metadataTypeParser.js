@@ -281,7 +281,7 @@ class MetadataTypeParser {
 
     let packageNameFolder = this.packageName.replaceAll(/\//g, "-");
     console.log('packageNameFolder33 ' + packageNameFolder);
-    const typePath = `${this.projectPath}/${this.packageNameFolder}/${folderType}`;
+    const typePath = `${this.projectPath}/${packageNameFolder}/${folderType}`;
     console.log('111 getDefaultTypes typePath ', typePath);
     // const typePath = `${this.projectPath}/${this.packageName}/${folderType}`;
     type.componentList.forEach((component) => {
