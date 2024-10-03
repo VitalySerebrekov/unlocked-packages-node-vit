@@ -196,15 +196,7 @@ class MetadataTypeParser {
     Object.values(this.packageTypeMap).forEach((type) => {
       const folderType = constants.METADATA_FOLDER_TYPE_MAP[type.type];
 
-      // let packageNameFolder = this.packageName.replaceAll(/\//g, "-");
-      // this.log.log('packageNameFolder11 ' + packageNameFolder);
-      // const folderTypePath = `${this.projectPath}/${packageNameFolder}/${folderType}`;
-
       const folderTypePath = `${this.projectPath}/${this.packageName}/${folderType}`;
-
-      this.log.log('this.projectPath ' + this.projectPath);
-      this.log.log('this.packageName ' + this.packageName);
-      this.log.log('folderType ' + folderType);
 
       if (folderType && fs.existsSync(folderTypePath)) {
         const folderContentList = fs.readdirSync(folderTypePath, { withFileTypes: true });
@@ -233,11 +225,12 @@ class MetadataTypeParser {
   //Document, EmailTemplate, Report
   getTypesFromFolder(type, folderContentList, folderType) {
 
-    let packageNameFolder = this.packageName.replaceAll(/\//g, "-");
-    this.log.log('packageNameFolder22 ' + packageNameFolder);
-    const typePath = `${this.projectPath}/${this.packageNameFolder}/${folderType}`;
-
     // const typePath = `${this.projectPath}/${this.packageName}/${folderType}`;
+
+    //  Case 00015574
+    let packageNameFolder = this.packageName.replaceAll(/\//g, "-");
+    const typePath = `${this.projectPath}/${packageNameFolder}/${folderType}`;
+
     type.componentList.forEach((component) => {
       const componentPathList = component.apiName.split('/');
       const componentFolder = componentPathList[0];
@@ -275,16 +268,12 @@ class MetadataTypeParser {
   // LightningExperienceTheme, Group, CustomMetadata, ContentAsset, CustomApplication
   getDefaultTypes(type, folderContentList, folderType){
 
-    console.log('111 getDefaultTypes type: ', type);
-    console.log('111 getDefaultTypes folderContentList: ', folderContentList);
-    console.log('111 getDefaultTypes folderType: ', folderType);
-
-    let packageNameFolder = this.packageName.replaceAll(/\//g, "-");
-    console.log('packageNameFolder33 ' + packageNameFolder);
-    const typePathCorrected = `${this.projectPath}/${packageNameFolder}/${folderType}`;
     const typePath = `${this.projectPath}/${this.packageName}/${folderType}`;
-    console.log('111 getDefaultTypes typePath ', typePath);
-    console.log('111 getDefaultTypes typePathCorrected ', typePathCorrected);
+
+    //  Case 00015574
+    const typePathCorrected = `${this.projectPath}/${packageNameFolder}/${folderType}`;
+    let packageNameFolder = this.packageName.replaceAll(/\//g, "-");
+
     type.componentList.forEach((component) => {
       folderContentList.forEach((content) => {
         const objectExtend = path.parse(content.name)
@@ -299,53 +288,21 @@ class MetadataTypeParser {
         }
       });
     });
-    this.log.log('111 getDefaultTypes middle ' + folderType);
-    console.log('111 getDefaultTypes componentList: ', this.componentList);
     type.componentList.forEach((component) => {
-                                              console.log('224 getDefaultTypes component: ', component);
-                                              console.log('226 getDefaultTypes componentList: ', this.componentList);
       this.componentList.push(component);
       this.count++;
       component.fileList.forEach((file) => {
         this.size += fs.statSync(`${typePath}/${file}`).size;
         if (component.isDirectory) {
-                                              // let addLocalFolder1 = `${typePath}/${file}`;
-                                              let addLocalFolder0 = `${typePath}/${file}`;
-                                              let addLocalFolder1 = `${typePathCorrected}/${file}`;
-                                              let addLocalFolder2 = `${folderType}/${file}`;
-                                              this.log.log('333 getDefaultTypes addLocalFolder0 ' + addLocalFolder0);
-                                              this.log.log('335 getDefaultTypes addLocalFolder1 ' + addLocalFolder1);
-                                              this.log.log('337 getDefaultTypes addLocalFolder2 ' + addLocalFolder2);
-                                              // const isExist1 = fs.existsSync(`${projectPath}/${packageNameFolder}/package.xml`);
-                                              const isExist1 = fs.existsSync(`${typePath}/${file}`);
-                                              console.log('DDD isExist1 ' + isExist1);
-                                              const isExist2 = fs.existsSync(`${typePathCorrected}/${file}`);
-                                              console.log('DDD isExist2 ' + isExist2);
-
-
-          // this.zip.addLocalFolder(`${typePath}/${file}`, `${folderType}/${file}`);
-          this.zip.addLocalFolder(`${typePathCorrected}/${file}`, `${folderType}/${file}`);
+          this.zip.addLocalFolder(`${typePathCorrected}/${file}`, `${folderType}/${file}`);   //  Case 00015574
         } else {
-                                              let addLocalFile0 = `${typePath}/${file}`;
-                                              let addLocalFile1 = `${typePathCorrected}/${file}`;
-                                              let addLocalFile2 = folderType;
-                                              this.log.log('443 getDefaultTypes addLocalFile0 ' + addLocalFile0);
-                                              this.log.log('445 getDefaultTypes addLocalFile1 ' + addLocalFile1);
-                                              this.log.log('447 getDefaultTypes addLocalFile2 ' + addLocalFile2);
-                                              const isExist1 = fs.existsSync(`${typePath}/${file}`);
-                                              console.log('GGG isExist1 ' + isExist1);
-                                              const isExist2 = fs.existsSync(`${typePathCorrected}/${file}`);
-                                              console.log('GGG isExist2 ' + isExist2);
-
           this.zip.addLocalFile(`${typePath}/${file}`, folderType);
-          // this.zip.addLocalFile(`${typePathCorrected}/${file}`, folderType);
         }
       });
       this.updateChunkList(type);
       delete component.isDirectory;
       delete component.fileList;
     });
-    this.log.log('881 getDefaultTypes end ' + folderType);
   }
 
   // CustomField, ListView, ValidationRule, WebLink
@@ -355,13 +312,7 @@ class MetadataTypeParser {
       return
     }
 
-    let packageNameFolder = this.packageName.replaceAll(/\//g, "-");
-    this.log.log('packageNameFolder44 ' + packageNameFolder);
-    this.log.log('this.packageName44 ' + this.packageName);
-
-    // const typePath = `${this.projectPath}/${packageNameFolder}/${folderType}`;
     const typePath = `${this.projectPath}/${this.packageName}/${folderType}`;
-    console.log('typePath44 ' + typePath);
     const prepareObjectMap = {};
     folderContentList.forEach((content) => {
       type.componentList.forEach((component) => {
@@ -400,11 +351,11 @@ class MetadataTypeParser {
 
   customLabelProcessor(type, folderContentList, folderType) {
 
-    let packageNameFolder = this.packageName.replaceAll(/\//g, "-");
-    this.log.log('packageNameFolder55 ' + packageNameFolder);
-    const customLabelPath = `${this.projectPath}/${this.packageNameFolder}/${folderType}/CustomLabels.labels`;
-
     // const customLabelPath = `${this.projectPath}/${this.packageName}/${folderType}/CustomLabels.labels`;
+
+    //  Case 00015574
+    let packageNameFolder = this.packageName.replaceAll(/\//g, "-");
+    const customLabelPath = `${this.projectPath}/${packageNameFolder}/${folderType}/CustomLabels.labels`;
 
     const xml = fs.readFileSync(customLabelPath)?.toString('utf8');
     const header = this.getHeader('CustomLabel');

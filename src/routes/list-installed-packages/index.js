@@ -9,7 +9,6 @@ router.post('/', (req, res) => {
   const log = logger.createLog(`unpack-list-installed-packages:${req.headers['x-request-id']}`);
   log.log(constants.START_LIST_INSTALLED_PACKAGES);
 
-  console.log('--- body', req.body)
   const fields = utils.checkRequiredFields(req.body, constants.LIST_INSTALLED_PACKAGES_REQUIRED_FIELDS);
   if (fields.length) {
     log.log(constants.REQUIRED_FIELDS_ERROR);

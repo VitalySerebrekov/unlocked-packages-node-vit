@@ -11,17 +11,16 @@ function retrievePackages(accessToken, projectName, packageName, dependencyList,
   return new Promise((resolve, reject) => {
     try {
 
+      //  Case 00015574
       let packageNameFolder = packageName.replaceAll(/\//g, "-");
-      log.log('packageNameFolder1 ' + packageNameFolder);
 
       log.log('Start Retrieve Packages');
       try {
 
-        log.log('projectName ' + projectName);
-        log.log('packageName ' + packageName);
+        //  Case 00015574
         fs.mkdirSync(`./${projectName}/${packageNameFolder}`);
-
         // fs.mkdirSync(`./${projectName}/${packageName}`);
+
       } catch (e) {
         log.log('Error Create Package Directory ' + e);
         reject(e);
@@ -31,6 +30,7 @@ function retrievePackages(accessToken, projectName, packageName, dependencyList,
         .then(() => {
           log.log('Start Retrieve Package ' + packageName);
 
+          //  Case 00015574
           return childProcess.call(
             constants.getSFDXRetrievePackage(accessToken, packageName),
             log,
@@ -81,11 +81,12 @@ function unzipPackages(projectName, packageName, dependencyList, log) {
         .then(() => {
           log.log('Start Unzip Package ' + packageName);
 
-          let packageNameFolder = packageName.replaceAll(/\//g, "-");
-          log.log('packageNameFolder2 ' + packageNameFolder);
-          return storage.unzip(`${projectName}/${packageNameFolder}/${constants.ZIP_PACKAGE_NAME}`, projectName, log)
+          // return storage.unzip(`${projectName}/${packageName}/${constants.ZIP_PACKAGE_NAME}`, projectName, log);
 
-          // return storage.unzip(`${projectName}/${packageName}/${constants.ZIP_PACKAGE_NAME}`, projectName, log)
+          //  Case 00015574
+          let packageNameFolder = packageName.replaceAll(/\//g, "-");
+          return storage.unzip(`${projectName}/${packageNameFolder}/${constants.ZIP_PACKAGE_NAME}`, projectName, log);
+
         })
         .then(() => log.log('End Unzip Package ' + packageName));
 

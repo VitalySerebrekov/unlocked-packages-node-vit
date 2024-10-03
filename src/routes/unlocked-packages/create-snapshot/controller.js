@@ -6,7 +6,6 @@ const storage = require('../../../services/storage');
 function createSnapshot(body, log) {
   return new Promise((resolve, reject) => {
     try {
-      console.log('--- body', body)
       const projectName = `create_snapshot_${new Date().getTime()}`;
       const instanceUrl = body.instanceUrl;
       const accessToken = body.accessToken;
