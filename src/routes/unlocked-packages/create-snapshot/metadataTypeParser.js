@@ -320,7 +320,8 @@ class MetadataTypeParser {
           console.log('metadataTypeParser [getDefaultTypes addLocalFolder] typePathCorrected: ', typePathCorrected);
           console.log('metadataTypeParser [getDefaultTypes addLocalFolder] file: ', file);
           console.log('metadataTypeParser [getDefaultTypes addLocalFolder] folderType: ', folderType);
-          this.zip.addLocalFolder(`${typePathCorrected}/${file}`, `${folderType}/${file}`);   //  Case 00015574
+          // this.zip.addLocalFolder(`${typePathCorrected}/${file}`, `${folderType}/${file}`);   //  Case 00015574
+          this.zip.addLocalFolder(`${typePath}/${file}`, `${folderType}/${file}`);   //  Case 00015574
         } else {
           console.log('metadataTypeParser [getDefaultTypes addLocalFile] typePath: ', typePath);
           console.log('metadataTypeParser [getDefaultTypes addLocalFile] typePathCorrected: ', typePathCorrected);
