@@ -189,8 +189,8 @@ class MetadataTypeParser {
       throw new Error('Please set properties \'packageTypeMap\' and \'packageName\'')
     }
 
-    // console.log('parseMetadata [] packageTypeMap: ', packageTypeMap);
-    console.log('parseMetadata [] packageName: ', packageName);
+    console.log('parseMetadata [] packageTypeMap: ', this.packageTypeMap);
+    console.log('parseMetadata [] packageName: ', this.packageName);
 
     Object.values(this.packageTypeMap).forEach((type) => {
       const folderType = constants.METADATA_FOLDER_TYPE_MAP[type.type];
