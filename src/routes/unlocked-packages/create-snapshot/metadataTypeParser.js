@@ -205,6 +205,9 @@ class MetadataTypeParser {
       if (folderType && fs.existsSync(folderTypePath)) {
         const folderContentList = fs.readdirSync(folderTypePath, { withFileTypes: true });
         console.log('----parseMetadata start IF2');
+        console.log('----parseMetadata start IF2 type', type);
+        console.log('----parseMetadata start IF2 type', type.type);
+        console.log('----parseMetadata start IF2 this.functionMap[type.type]', this.functionMap[type.type]);
         if (this.functionMap[type.type]) {
           this.functionMap[type.type].call(this, type, folderContentList, folderType);
         } else {
