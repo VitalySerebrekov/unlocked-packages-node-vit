@@ -125,10 +125,6 @@ function getComponentTypesFromPackageXML(projectPath, packageName, dependencyLis
       dependencyList = JSON.parse(JSON.stringify(dependencyList));
       dependencyList.push(packageName);
       for (const packName of dependencyList) {
-
-        const isExistPackageXML = fs.existsSync(`${projectPath}/${packName}/package.xml`);
-        log.log('Is exist package.xml ' + isExistPackageXML);
-
         const packageXML = fs.readFileSync(`${projectPath}/${packName}/package.xml`);
         const packageJSON = await parser.parseStringPromise(packageXML);
 

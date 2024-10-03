@@ -110,72 +110,66 @@ class MetadataTypeParser {
       ApexPage: this.getDefaultTypes,
       ApexTrigger: this.getDefaultTypes,
       AppMenu: this.getDefaultTypes,
+      AssignmentRule: this.getChildTypesFromCustomObject,
+      AutoResponseRule: this.getChildTypesFromCustomObject,
       AuraDefinitionBundle: this.getDefaultTypes,
+      ApexTestSuite: this.getDefaultTypes,
+      BrandingSet: this.getDefaultTypes,
+      BusinessProcess: this.getChildTypesFromCustomObject,
       CustomObject: this.getDefaultTypes,
       CustomPermission: this.getDefaultTypes,
+      CustomNotificationType: this.getDefaultTypes,
+      CustomObjectTranslation: this.getDefaultTypes,
       CustomTab: this.getDefaultTypes,
+      ContentAsset: this.getDefaultTypes,
+      CustomMetadata: this.getDefaultTypes,
+      CustomApplication: this.getDefaultTypes,
+      CustomLabel: this.customLabelProcessor,
+      CustomField: this.getChildTypesFromCustomObject,
+      CompactLayout: this.getChildTypesFromCustomObject,
+      Document: this.getTypesFromFolder,
+      EscalationRule: this.getChildTypesFromCustomObject,
+      EmailTemplate: this.getTypesFromFolder,
       FlexiPage: this.getDefaultTypes,
       Flow: this.getDefaultTypes,
       FlowDefinition: this.getDefaultTypes,
+      FieldSet: this.getChildTypesFromCustomObject,
       GlobalValueSet: this.getDefaultTypes,
+      Group: this.getDefaultTypes,
       HomePageLayout: this.getDefaultTypes,
       IframeWhiteListUrlSettings: this.getDefaultTypes,
       Layout: this.getDefaultTypes,
       LightningComponentBundle: this.getDefaultTypes,
+      LightningExperienceTheme: this.getDefaultTypes,
+      ListView: this.getChildTypesFromCustomObject,
+      MatchingRule: this.getChildTypesFromCustomObject,
+      ManagedTopic: this.getChildTypesFromCustomObject,
       NamedCredential: this.getDefaultTypes,
       PermissionSet: this.getDefaultTypes,
       PermissionSetGroup: this.getDefaultTypes,
-      RemoteSiteSetting: this.getDefaultTypes,
-      ReportType: this.getDefaultTypes,
-      StaticResource: this.getDefaultTypes,
-      BrandingSet: this.getDefaultTypes,
-      CustomApplication: this.getDefaultTypes,
-
-      ContentAsset: this.getDefaultTypes,
-      CustomMetadata: this.getDefaultTypes,
-      Group: this.getDefaultTypes,
-      LightningExperienceTheme: this.getDefaultTypes,
-      CustomNotificationType: this.getDefaultTypes,
-      CustomObjectTranslation: this.getDefaultTypes,
       PathAssistant: this.getDefaultTypes,
       Queue: this.getDefaultTypes,
       QuickAction: this.getDefaultTypes,
+      RemoteSiteSetting: this.getDefaultTypes,
+      Report: this.getTypesFromFolder,
+      ReportType: this.getDefaultTypes,
+      RecordType: this.getRecordTypes,
       Role: this.getDefaultTypes,
+      StaticResource: this.getDefaultTypes,
+      SharingOwnerRule: this.getChildTypesFromCustomObject,
+      SharingCriteriaRule: this.getChildTypesFromCustomObject,
+      SharingReason: this.getChildTypesFromCustomObject,
       Settings: this.getDefaultTypes,
       StandardValueSet: this.getDefaultTypes,
-      ApexTestSuite: this.getDefaultTypes,
-      Workflow: this.getDefaultTypes,
-
-      CustomLabel: this.customLabelProcessor,
-
-      CustomField: this.getChildTypesFromCustomObject,
-      ListView: this.getChildTypesFromCustomObject,
       ValidationRule: this.getChildTypesFromCustomObject,
       WebLink: this.getChildTypesFromCustomObject,
-      CompactLayout: this.getChildTypesFromCustomObject,
-      BusinessProcess: this.getChildTypesFromCustomObject,
-      FieldSet: this.getChildTypesFromCustomObject,
-      AssignmentRule: this.getChildTypesFromCustomObject,
-      AutoResponseRule: this.getChildTypesFromCustomObject,
+      Workflow: this.getDefaultTypes,
       WorkflowTask: this.getChildTypesFromCustomObject,
       WorkflowOutboundMessage: this.getChildTypesFromCustomObject,
       WorkflowFieldUpdate: this.getChildTypesFromCustomObject,
       WorkflowKnowledgePublish: this.getChildTypesFromCustomObject,
       WorkflowAlert: this.getChildTypesFromCustomObject,
-      WorkflowRule: this.getChildTypesFromCustomObject,
-      SharingOwnerRule: this.getChildTypesFromCustomObject,
-      SharingCriteriaRule: this.getChildTypesFromCustomObject,
-      SharingReason: this.getChildTypesFromCustomObject,
-      EscalationRule: this.getChildTypesFromCustomObject,
-      MatchingRule: this.getChildTypesFromCustomObject,
-      ManagedTopic: this.getChildTypesFromCustomObject,
-      // FieldSet: this.getChildTypesFromCustomObject,
-
-      RecordType: this.getRecordTypes,
-
-      Document: this.getTypesFromFolder,
-      EmailTemplate: this.getTypesFromFolder,
-      Report: this.getTypesFromFolder
+      WorkflowRule: this.getChildTypesFromCustomObject
     }
   }
 
@@ -195,9 +189,7 @@ class MetadataTypeParser {
     }
     Object.values(this.packageTypeMap).forEach((type) => {
       const folderType = constants.METADATA_FOLDER_TYPE_MAP[type.type];
-
       const folderTypePath = `${this.projectPath}/${this.packageName}/${folderType}`;
-
       if (folderType && fs.existsSync(folderTypePath)) {
         const folderContentList = fs.readdirSync(folderTypePath, { withFileTypes: true });
         if (this.functionMap[type.type]) {
@@ -288,6 +280,7 @@ class MetadataTypeParser {
         }
       });
     });
+
     type.componentList.forEach((component) => {
       this.componentList.push(component);
       this.count++;
@@ -303,6 +296,7 @@ class MetadataTypeParser {
       delete component.isDirectory;
       delete component.fileList;
     });
+
   }
 
   // CustomField, ListView, ValidationRule, WebLink
@@ -311,7 +305,6 @@ class MetadataTypeParser {
       this.log.log(`Unsupported Component Type ${type.type}. Child Type Not Found.`);
       return
     }
-
     const typePath = `${this.projectPath}/${this.packageName}/${folderType}`;
     const prepareObjectMap = {};
     folderContentList.forEach((content) => {
