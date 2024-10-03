@@ -283,6 +283,8 @@ class MetadataTypeParser {
   // LightningExperienceTheme, Group, CustomMetadata, ContentAsset, CustomApplication
   getDefaultTypes(type, folderContentList, folderType){
 
+    console.log('metadataTypeParser [getDefaultTypes] ');
+
     const typePath = `${this.projectPath}/${this.packageName}/${folderType}`;
 
     //  Case 00015574
@@ -308,10 +310,22 @@ class MetadataTypeParser {
       this.componentList.push(component);
       this.count++;
       component.fileList.forEach((file) => {
+
+        console.log('metadataTypeParser [getDefaultTypes] file: ', file);
+        console.log('metadataTypeParser [getDefaultTypes] component.isDirectory: ', component.isDirectory);
+
         this.size += fs.statSync(`${typePath}/${file}`).size;
         if (component.isDirectory) {
+          console.log('metadataTypeParser [getDefaultTypes addLocalFolder] typePath: ', typePath);
+          console.log('metadataTypeParser [getDefaultTypes addLocalFolder] typePathCorrected: ', typePathCorrected);
+          console.log('metadataTypeParser [getDefaultTypes addLocalFolder] file: ', file);
+          console.log('metadataTypeParser [getDefaultTypes addLocalFolder] folderType: ', folderType);
           this.zip.addLocalFolder(`${typePathCorrected}/${file}`, `${folderType}/${file}`);   //  Case 00015574
         } else {
+          console.log('metadataTypeParser [getDefaultTypes addLocalFile] typePath: ', typePath);
+          console.log('metadataTypeParser [getDefaultTypes addLocalFile] typePathCorrected: ', typePathCorrected);
+          console.log('metadataTypeParser [getDefaultTypes addLocalFile] file: ', file);
+          console.log('metadataTypeParser [getDefaultTypes addLocalFile] folderType: ', folderType);
           this.zip.addLocalFile(`${typePath}/${file}`, folderType);
         }
       });
