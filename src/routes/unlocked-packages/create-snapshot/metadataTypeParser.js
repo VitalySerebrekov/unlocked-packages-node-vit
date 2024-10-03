@@ -207,7 +207,7 @@ class MetadataTypeParser {
         console.log('----parseMetadata start IF2');
         // console.log('----parseMetadata start IF2 type', type);
         // console.log('----parseMetadata start IF2 type', type.type);
-        console.log('----parseMetadata start IF2 this.functionMap[type.type]', this.functionMap[type.type]);
+        // console.log('----parseMetadata start IF2 this.functionMap[type.type]', this.functionMap[type.type]);
         if (this.functionMap[type.type]) {
           this.functionMap[type.type].call(this, type, folderContentList, folderType);
         } else {
@@ -382,11 +382,11 @@ class MetadataTypeParser {
 
   customLabelProcessor(type, folderContentList, folderType) {
 
-    // const customLabelPath = `${this.projectPath}/${this.packageName}/${folderType}/CustomLabels.labels`;
+    const customLabelPath = `${this.projectPath}/${this.packageName}/${folderType}/CustomLabels.labels`;
 
     //  Case 00015574
-    let packageNameFolder = this.packageName.replaceAll(/\//g, "-");
-    const customLabelPath = `${this.projectPath}/${packageNameFolder}/${folderType}/CustomLabels.labels`;
+    // let packageNameFolder = this.packageName.replaceAll(/\//g, "-");
+    // const customLabelPath = `${this.projectPath}/${packageNameFolder}/${folderType}/CustomLabels.labels`;
 
     const xml = fs.readFileSync(customLabelPath)?.toString('utf8');
     const header = this.getHeader('CustomLabel');
