@@ -183,12 +183,13 @@ class MetadataTypeParser {
   }
 
   parseMetadata() {
+    console.log('parseMetadata START ');
     this.init();
     if (!this.packageTypeMap || !this.packageName) {
       throw new Error('Please set properties \'packageTypeMap\' and \'packageName\'')
     }
 
-    console.log('parseMetadata [] packageTypeMap: ', packageTypeMap);
+    // console.log('parseMetadata [] packageTypeMap: ', packageTypeMap);
     console.log('parseMetadata [] packageName: ', packageName);
 
     Object.values(this.packageTypeMap).forEach((type) => {
