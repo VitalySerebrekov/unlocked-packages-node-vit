@@ -251,6 +251,11 @@ function createZipComponents(projectPath, packageName, dependencyList, packageMa
     try {
       log.log('Start Create Zip Components');
 
+      console.log('helper.js [createZipComponents] projectPath: ', projectPath);
+      console.log('helper.js [createZipComponents] packageName: ', packageName);
+      console.log('helper.js [createZipComponents] dependencyList: ', dependencyList);
+      console.log('helper.js [createZipComponents] packageMap: ', packageMap);
+
       dependencyList.push(packageName);
       let metadataTypeParser = new MetadataTypeParser(projectPath, log);
       const chunkList = []

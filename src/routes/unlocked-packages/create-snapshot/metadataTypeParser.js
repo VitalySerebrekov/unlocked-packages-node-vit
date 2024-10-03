@@ -187,20 +187,37 @@ class MetadataTypeParser {
     if (!this.packageTypeMap || !this.packageName) {
       throw new Error('Please set properties \'packageTypeMap\' and \'packageName\'')
     }
+
+    console.log('parseMetadata [] packageTypeMap: ', packageTypeMap);
+    console.log('parseMetadata [] packageName: ', packageName);
+
     Object.values(this.packageTypeMap).forEach((type) => {
       const folderType = constants.METADATA_FOLDER_TYPE_MAP[type.type];
       const folderTypePath = `${this.projectPath}/${this.packageName}/${folderType}`;
+
+      console.log('--parseMetadata [] folderType: ', folderType);
+      console.log('--parseMetadata [] folderTypePath: ', folderTypePath);
+      const isExist1 = fs.existsSync(folderTypePath);
+      console.log('--parseMetadata [] isExist1: ', isExist1);
+
+      console.log('----parseMetadata start IF1');
       if (folderType && fs.existsSync(folderTypePath)) {
         const folderContentList = fs.readdirSync(folderTypePath, { withFileTypes: true });
+        console.log('----parseMetadata start IF2');
         if (this.functionMap[type.type]) {
           this.functionMap[type.type].call(this, type, folderContentList, folderType);
         } else {
+          console.log('----parseMetadata continue IF2 ELSE');
           this.log.log(`Unsupported Component Type ${type.type}. Handler Not Found.`);
         }
       } else {
+        console.log('----parseMetadata continue IF1 ELSE');
         this.log.log(`Unsupported Component Type ${type.type}. Folder Not Found.`);
       }
+      console.log('----parseMetadata end IF1');
 
+      // console.log('parseMetadata [] folderTypePath: ', folderTypePath);
+      // console.log('parseMetadata [] folderTypePath: ', folderTypePath);
       const zipBuffer = this.zip.toBuffer().toString('base64');
       if (zipBuffer !== 'UEsFBgAAAAAAAAAAAAAAAAAAAAAAAA==') {
         this.chunkList[this.chunkCounter].typeList.push({ componentList: this.componentList, type: type.type, zip: zipBuffer });
@@ -210,6 +227,8 @@ class MetadataTypeParser {
       this.componentList = [];
       this.count = 0;
     });
+
+    console.log('parseMetadata END ');
 
     return this.chunkList;
   }
