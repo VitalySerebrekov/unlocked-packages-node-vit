@@ -376,7 +376,7 @@ class MetadataTypeParser {
         console.log('objectXML2: ', objectXML.MyRootElement.ElementX[1].toString());
 
         var finalXML = x2js.js2xml(objectXML);
-        console.log('finalXML: ' + finalXML);
+        console.log('finalXML3: ' + finalXML);
 
         this.zip.addFile(`${folderType}/CustomLabels.labels`, full);
         this.updateChunkList('CustomLabel');
@@ -388,6 +388,17 @@ class MetadataTypeParser {
       const full = `${header}${fullLabelXML}${footer}`;
       this.zip.addFile(`${folderType}/CustomLabels.labels`, full);
       this.updateChunkList('CustomLabel');
+
+      var x2js = new X2JS();
+      const tempXML = `${header}${fullLabelXML}${footer}`;
+      var objectXML = x2js.xml2js(tempXML);
+
+      console.log('objectXML11: ', objectXML);
+      console.log('objectXML22: ', objectXML.MyRootElement.ElementX[1].toString());
+
+      var finalXML = x2js.js2xml(objectXML);
+      console.log('finalXML33: ' + finalXML);
+
     }
   }
 
