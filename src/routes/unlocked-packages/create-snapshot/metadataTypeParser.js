@@ -219,13 +219,7 @@ class MetadataTypeParser {
 
   //Document, EmailTemplate, Report
   getTypesFromFolder(type, folderContentList, folderType) {
-
-    // const typePath = `${this.projectPath}/${this.packageName}/${folderType}`;
-
-    //  Case 00015574
-    const packageNameFolder = this.packageName.replaceAll(/\//g, "-");
-    const typePath = `${this.projectPath}/${packageNameFolder}/${folderType}`;
-
+    const typePath = `${this.projectPath}/${this.packageName}/${folderType}`;
     type.componentList.forEach((component) => {
       const componentPathList = component.apiName.split('/');
       const componentFolder = componentPathList[0];
@@ -354,7 +348,7 @@ class MetadataTypeParser {
         this.componentList.push(component);
         count++;
       }
-      if (count > 100) {
+      if (count > 1000) {
         // const full = `${header}${fullLabelXML}${footer}`;
         const full = xmlFormat(`${header}${fullLabelXML}${footer}`, {collapseContent: true, lineSeparator: '\n'});
 
