@@ -372,7 +372,7 @@ class MetadataTypeParser {
         const tempXML = `${header}${fullLabelXML}${footer}`;
         var objectXML = x2js.xml2js(tempXML);
 
-        // console.log('objectXML1: ', objectXML);
+        console.log('objectXML1: ', objectXML);
         // console.log('objectXML2: ', objectXML.MyRootElement.ElementX[1].toString());
 
         var finalXML = x2js.js2xml(objectXML);
@@ -417,14 +417,14 @@ class MetadataTypeParser {
     let jsonItem = {};
     const srcJson = x2js.xml2js(xml);
 
-    console.log('customLabelProcessor srcJson: ', srcJson);
+    console.log('customLabelProcessor srcJson22: ', srcJson);
 
     const getBody = (tempJSON, type) => {
-      console.log('customLabelProcessor tempJSON: ' + tempJSON);
+      console.log('customLabelProcessor tempJSON44: ' + tempJSON);
       let tempJSON1 = '<${this.customObjectChildMap[type]}>' + x2js.js2xml(JSON.parse(tempJSON)) + '</${this.customObjectChildMap[type]}';
-      console.log('customLabelProcessor srcJson: ', srcJson);
+      console.log('customLabelProcessor srcJson55 tempJSON1: ', tempJSON1);
       let tempJSON2 = '<${this.customObjectChildMap[type]}>' + '\n' + x2js.js2xml(JSON.parse(tempJSON)) + '\n' + '</${this.customObjectChildMap[type]}';
-      console.log('customLabelProcessor srcJson: ', srcJson);
+      console.log('customLabelProcessor srcJson66 tempJSON2: ', tempJSON2);
 
       return `<${this.customObjectChildMap[type]}>${x2js.js2xml(JSON.parse(tempJSON))}</${this.customObjectChildMap[type]}>`
     }
