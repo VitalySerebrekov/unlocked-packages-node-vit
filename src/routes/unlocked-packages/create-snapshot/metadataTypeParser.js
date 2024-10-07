@@ -339,12 +339,12 @@ class MetadataTypeParser {
 
   customLabelProcessor(type, folderContentList, folderType) {
     const customLabelPathOLD = `${this.projectPath}/${this.packageName}/${folderType}/CustomLabels.labels`;
-    const isExist1 = fs.existsSync(`${customLabelPathOLD}/package.xml`);
+    const isExist1 = fs.existsSync(`${customLabelPathOLD}`);
     console.log('customLabelProcessor isExist1 ' + isExist1);
 
     const packageNameFolder = this.packageName.replaceAll(/\//g, "-");
     const customLabelPath = `${this.projectPath}/${packageNameFolder}/${folderType}/CustomLabels.labels`;
-    const isExist2 = fs.existsSync(`${customLabelPath}/package.xml`);
+    const isExist2 = fs.existsSync(`${customLabelPath}`);
     console.log('customLabelProcessor isExist2 ' + isExist2);
 
     const xml = fs.readFileSync(customLabelPath)?.toString('utf8');
