@@ -125,6 +125,7 @@ class MetadataTypeParser {
       CustomMetadata: this.getDefaultTypes,
       CustomApplication: this.getDefaultTypes,
       CustomLabel: this.customLabelProcessor,
+      CustomLabels: this.customLabelProcessor,
       CustomField: this.getChildTypesFromCustomObject,
       CompactLayout: this.getChildTypesFromCustomObject,
       Document: this.getTypesFromFolder,
