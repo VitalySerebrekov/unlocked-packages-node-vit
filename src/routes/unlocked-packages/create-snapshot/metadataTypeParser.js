@@ -341,6 +341,7 @@ class MetadataTypeParser {
 
   customLabelProcessor(type, folderContentList, folderType) {
     const customLabelPath = `${this.projectPath}/${this.packageName}/${folderType}/CustomLabels.labels`;
+
     const xml = fs.readFileSync(customLabelPath)?.toString('utf8');
     const header = this.getHeader('CustomLabel');
     let fullLabelXML = '';
@@ -348,7 +349,6 @@ class MetadataTypeParser {
     let count = 0;
     type.componentList.forEach((component) => {
       const labelXML = this.getChildXML(xml, component.componentType, component.apiName);
-
       if (labelXML) {
         fullLabelXML += labelXML;
         this.componentList.push(component);
