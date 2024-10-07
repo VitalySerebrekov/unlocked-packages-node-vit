@@ -3,6 +3,7 @@ const fs = require('fs');
 const X2JS = require('x2js');
 const constants = require('../../../constants');
 const path = require('path');
+const xmlFormat = require('xml-formatter');
 
 class MetadataTypeParser {
   count;
@@ -340,13 +341,6 @@ class MetadataTypeParser {
 
   customLabelProcessor(type, folderContentList, folderType) {
     const customLabelPath = `${this.projectPath}/${this.packageName}/${folderType}/CustomLabels.labels`;
-    const isExist1 = fs.existsSync(`${customLabelPath}`);
-    console.log('customLabelProcessor isExist1 ' + isExist1);
-
-    // const packageNameFolder = this.packageName.replaceAll(/\//g, "-");
-    // const customLabelPath = `${this.projectPath}/${packageNameFolder}/${folderType}/CustomLabels.labels`;
-    // const isExist2 = fs.existsSync(`${customLabelPath}`);
-    // console.log('customLabelProcessor isExist2 ' + isExist2);
 
     const xml = fs.readFileSync(customLabelPath)?.toString('utf8');
     console.log('customLabelProcessor xml ' + xml);
@@ -378,6 +372,9 @@ class MetadataTypeParser {
         var finalXML = x2js.js2xml(objectXML);
         console.log('finalXML3: ' + finalXML);
 
+        var finalXML2 = xmlFormat(finalXML);
+        console.log('finalXML2: ' + finalXML2);
+
         this.zip.addFile(`${folderType}/CustomLabels.labels`, full);
         this.updateChunkList('CustomLabel');
         fullLabelXML = '';
@@ -393,11 +390,14 @@ class MetadataTypeParser {
       const tempXML = `${header}${fullLabelXML}${footer}`;
       var objectXML = x2js.xml2js(tempXML);
 
-      // console.log('objectXML11: ', objectXML);
+      console.log('objectXML11: ', objectXML);
       // console.log('objectXML22: ', objectXML.MyRootElement.ElementX[1].toString());
 
       var finalXML = x2js.js2xml(objectXML);
       console.log('finalXML33: ' + finalXML);
+
+      var finalXML2 = xmlFormat(finalXML);
+      console.log('finalXML2: ' + finalXML2);
 
     }
   }
@@ -421,9 +421,9 @@ class MetadataTypeParser {
 
     const getBody = (tempJSON, type) => {
       console.log('customLabelProcessor tempJSON44: ' + tempJSON);
-      let tempJSON1 = '<${this.customObjectChildMap[type]}>' + x2js.js2xml(JSON.parse(tempJSON)) + '</${this.customObjectChildMap[type]}';
+      let tempJSON1 = `<${this.customObjectChildMap[type]}>` + x2js.js2xml(JSON.parse(tempJSON)) + `</${this.customObjectChildMap[type]}`;
       console.log('customLabelProcessor srcJson55 tempJSON1: ', tempJSON1);
-      let tempJSON2 = '<${this.customObjectChildMap[type]}>' + '\n' + x2js.js2xml(JSON.parse(tempJSON)) + '\n' + '</${this.customObjectChildMap[type]}';
+      let tempJSON2 = `<${this.customObjectChildMap[type]}>` + '\n' + x2js.js2xml(JSON.parse(tempJSON)) + '\n' + `</${this.customObjectChildMap[type]}`;
       console.log('customLabelProcessor srcJson66 tempJSON2: ', tempJSON2);
 
       return `<${this.customObjectChildMap[type]}>${x2js.js2xml(JSON.parse(tempJSON))}</${this.customObjectChildMap[type]}>`
