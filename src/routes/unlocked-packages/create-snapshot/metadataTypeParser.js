@@ -360,20 +360,21 @@ class MetadataTypeParser {
         count++;
       }
       if (count > 100) {
-        const full = `${header}${fullLabelXML}${footer}`;
+        // const full = `${header}${fullLabelXML}${footer}`;
+        const full = xmlFormat(`${header}${fullLabelXML}${footer}`, {collapseContent: true, lineSeparator: '\n'});
 
-        var x2js = new X2JS();
-        const tempXML = `${header}${fullLabelXML}${footer}`;
-        var objectXML = x2js.xml2js(tempXML);
+        // var x2js = new X2JS();
+        // const tempXML = `${header}${fullLabelXML}${footer}`;
+        // var objectXML = x2js.xml2js(tempXML);
 
-        console.log('objectXML1: ', objectXML);
-        // console.log('objectXML2: ', objectXML.MyRootElement.ElementX[1].toString());
+        // console.log('objectXML1: ', objectXML);
+        // // console.log('objectXML2: ', objectXML.MyRootElement.ElementX[1].toString());
 
-        var finalXML = x2js.js2xml(objectXML);
-        console.log('finalXML3: ' + finalXML);
+        // var finalXML = x2js.js2xml(objectXML);
+        // console.log('finalXML3: ' + finalXML);
 
-        var finalXML2 = xmlFormat(finalXML);
-        console.log('finalXML2: ' + finalXML2);
+        // var finalXML2 = xmlFormat(finalXML);
+        // console.log('finalXML2: ' + finalXML2);
 
         this.zip.addFile(`${folderType}/CustomLabels.labels`, full);
         this.updateChunkList('CustomLabel');
@@ -382,25 +383,27 @@ class MetadataTypeParser {
     });
 
     if (this.componentList.length) {
-      const full = `${header}${fullLabelXML}${footer}`;
+      // const full = `${header}${fullLabelXML}${footer}`;
+      const full = xmlFormat(`${header}${fullLabelXML}${footer}`, {collapseContent: true, lineSeparator: '\n'});
+
       this.zip.addFile(`${folderType}/CustomLabels.labels`, full);
       this.updateChunkList('CustomLabel');
 
-      var x2js = new X2JS();
-      const tempXML = `${header}${fullLabelXML}${footer}`;
-      var objectXML = x2js.xml2js(tempXML);
+      // var x2js = new X2JS();
+      // const tempXML = `${header}${fullLabelXML}${footer}`;
+      // var objectXML = x2js.xml2js(tempXML);
 
-      console.log('objectXML11: ', objectXML);
-      // console.log('objectXML22: ', objectXML.MyRootElement.ElementX[1].toString());
+      // console.log('objectXML11: ', objectXML);
+      // // console.log('objectXML22: ', objectXML.MyRootElement.ElementX[1].toString());
 
-      var finalXML = x2js.js2xml(objectXML);
-      console.log('finalXML33: ' + finalXML);
+      // var finalXML = x2js.js2xml(objectXML);
+      // console.log('finalXML33: ' + finalXML);
 
-      var finalXML2 = xmlFormat(finalXML);
-      console.log('finalXML2: ' + finalXML2);
+      // var finalXML2 = xmlFormat(finalXML);
+      // console.log('finalXML2: ' + finalXML2);
 
-      var finalXML666 = xmlFormat(finalXML, {collapseContent: true, lineSeparator: '\n'});
-      console.log('finalXML666: ' + finalXML666);
+      // var finalXML666 = xmlFormat(finalXML, {collapseContent: true, lineSeparator: '\n'});
+      // console.log('finalXML666: ' + finalXML666);
 
     }
   }
