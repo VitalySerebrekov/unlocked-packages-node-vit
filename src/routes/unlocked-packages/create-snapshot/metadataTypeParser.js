@@ -350,7 +350,7 @@ class MetadataTypeParser {
       }
       if (count > 1000) {
         // const full = `${header}${fullLabelXML}${footer}`;
-        const full = xmlFormat(`${header}${fullLabelXML}${footer}`, {collapseContent: true, lineSeparator: '\n'});
+        const full = xmlFormat(`${header}${fullLabelXML}${footer}`, { collapseContent: true, lineSeparator: '\n' });
 
         this.zip.addFile(`${folderType}/CustomLabels.labels`, full);
         this.updateChunkList('CustomLabel');
@@ -360,7 +360,7 @@ class MetadataTypeParser {
 
     if (this.componentList.length) {
       // const full = `${header}${fullLabelXML}${footer}`;
-      const full = xmlFormat(`${header}${fullLabelXML}${footer}`, {collapseContent: true, lineSeparator: '\n'});
+      const full = xmlFormat(`${header}${fullLabelXML}${footer}`, { collapseContent: true, lineSeparator: '\n' });
 
       this.zip.addFile(`${folderType}/CustomLabels.labels`, full);
       this.updateChunkList('CustomLabel');

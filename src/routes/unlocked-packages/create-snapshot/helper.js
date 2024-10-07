@@ -12,7 +12,7 @@ function retrievePackages(accessToken, projectName, packageName, dependencyList,
     try {
 
       //  Case 00015574
-      const packageNameFolder = packageName.replaceAll(/\//g, "-");
+      const packageNameFolder = packageName.replaceAll(/\//g, '-');
 
       log.log('Start Retrieve Packages');
       try {
@@ -84,7 +84,7 @@ function unzipPackages(projectName, packageName, dependencyList, log) {
           // return storage.unzip(`${projectName}/${packageName}/${constants.ZIP_PACKAGE_NAME}`, projectName, log);
 
           //  Case 00015574
-          const packageNameFolder = packageName.replaceAll(/\//g, "-");
+          const packageNameFolder = packageName.replaceAll(/\//g, '-');
           return storage.unzip(`${projectName}/${packageNameFolder}/${constants.ZIP_PACKAGE_NAME}`, projectName, log);
 
         })
