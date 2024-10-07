@@ -395,9 +395,12 @@ class MetadataTypeParser {
     let jsonItem = {};
     const srcJson = x2js.xml2js(xml);
 
-    // const getBody = (tempJSON, type) => {
-    //   return `<${this.customObjectChildMap[type]}>${x2js.js2xml(JSON.parse(tempJSON))}</${this.customObjectChildMap[type]}>`
-    // }
+    console.log('customLabelProcessor srcJson ' + srcJson);
+
+    const getBody = (tempJSON, type) => {
+      console.log('customLabelProcessor tempJSON ' + tempJSON);
+      return `<${this.customObjectChildMap[type]}>${x2js.js2xml(JSON.parse(tempJSON))}</${this.customObjectChildMap[type]}>`
+    }
 
     if (srcJson) {
       const srcItemList = srcJson[this.innerSRCJSONMap[type]][this.customObjectChildMap[type]];
