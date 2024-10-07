@@ -372,8 +372,8 @@ class MetadataTypeParser {
         const tempXML = `${header}${fullLabelXML}${footer}`;
         var objectXML = x2js.xml2js(tempXML);
 
-        console.log('objectXML1: ', objectXML);
-        console.log('objectXML2: ', objectXML.MyRootElement.ElementX[1].toString());
+        // console.log('objectXML1: ', objectXML);
+        // console.log('objectXML2: ', objectXML.MyRootElement.ElementX[1].toString());
 
         var finalXML = x2js.js2xml(objectXML);
         console.log('finalXML3: ' + finalXML);
@@ -393,8 +393,8 @@ class MetadataTypeParser {
       const tempXML = `${header}${fullLabelXML}${footer}`;
       var objectXML = x2js.xml2js(tempXML);
 
-      console.log('objectXML11: ', objectXML);
-      console.log('objectXML22: ', objectXML.MyRootElement.ElementX[1].toString());
+      // console.log('objectXML11: ', objectXML);
+      // console.log('objectXML22: ', objectXML.MyRootElement.ElementX[1].toString());
 
       var finalXML = x2js.js2xml(objectXML);
       console.log('finalXML33: ' + finalXML);
