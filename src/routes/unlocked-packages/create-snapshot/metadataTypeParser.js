@@ -125,6 +125,7 @@ class MetadataTypeParser {
       CustomMetadata: this.getDefaultTypes,
       CustomApplication: this.getDefaultTypes,
       CustomLabel: this.customLabelProcessor,
+      // CustomLabel: this.getDefaultTypes,
       // CustomLabels: this.customLabelProcessor,
       CustomField: this.getChildTypesFromCustomObject,
       CompactLayout: this.getChildTypesFromCustomObject,
@@ -348,14 +349,19 @@ class MetadataTypeParser {
     // console.log('customLabelProcessor isExist2 ' + isExist2);
 
     const xml = fs.readFileSync(customLabelPath)?.toString('utf8');
+    console.log('customLabelProcessor xml ' + xml);
+
+
     const header = this.getHeader('CustomLabel');
     let fullLabelXML = '';
     const footer = this.getFooter('CustomLabel');
     let count = 0;
     type.componentList.forEach((component) => {
       const labelXML = this.getChildXML(xml, component.componentType, component.apiName);
+      console.log('customLabelProcessor labelXML ' + labelXML);
       if (labelXML) {
         fullLabelXML += labelXML;
+        console.log('customLabelProcessor fullLabelXML ' + fullLabelXML);
         this.componentList.push(component);
         count++;
       }
