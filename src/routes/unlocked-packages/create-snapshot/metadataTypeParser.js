@@ -367,6 +367,17 @@ class MetadataTypeParser {
       }
       if (count > 100) {
         const full = `${header}${fullLabelXML}${footer}`;
+
+        var x2js = new X2JS();
+        const tempXML = `${header}${fullLabelXML}${footer}`;
+        var objectXML = x2js.xml2js(tempXML);
+
+        console.log('objectXML1: ', objectXML);
+        console.log('objectXML2: ', objectXML.MyRootElement.ElementX[1].toString());
+
+        var finalXML = x2js.js2xml(objectXML);
+        console.log('finalXML: ' + finalXML);
+
         this.zip.addFile(`${folderType}/CustomLabels.labels`, full);
         this.updateChunkList('CustomLabel');
         fullLabelXML = '';
@@ -395,10 +406,15 @@ class MetadataTypeParser {
     let jsonItem = {};
     const srcJson = x2js.xml2js(xml);
 
-    console.log('customLabelProcessor srcJson ' + srcJson);
+    console.log('customLabelProcessor srcJson: ', srcJson);
 
     const getBody = (tempJSON, type) => {
-      console.log('customLabelProcessor tempJSON ' + tempJSON);
+      console.log('customLabelProcessor tempJSON: ' + tempJSON);
+      let tempJSON1 = '<${this.customObjectChildMap[type]}>' + x2js.js2xml(JSON.parse(tempJSON)) + '</${this.customObjectChildMap[type]}';
+      console.log('customLabelProcessor srcJson: ', srcJson);
+      let tempJSON2 = '<${this.customObjectChildMap[type]}>' + '\n' + x2js.js2xml(JSON.parse(tempJSON)) + '\n' + '</${this.customObjectChildMap[type]}';
+      console.log('customLabelProcessor srcJson: ', srcJson);
+
       return `<${this.customObjectChildMap[type]}>${x2js.js2xml(JSON.parse(tempJSON))}</${this.customObjectChildMap[type]}>`
     }
 
