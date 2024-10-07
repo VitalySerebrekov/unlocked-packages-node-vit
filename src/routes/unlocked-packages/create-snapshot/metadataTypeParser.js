@@ -125,7 +125,7 @@ class MetadataTypeParser {
       CustomMetadata: this.getDefaultTypes,
       CustomApplication: this.getDefaultTypes,
       CustomLabel: this.customLabelProcessor,
-      CustomLabels: this.customLabelProcessor,
+      // CustomLabels: this.customLabelProcessor,
       CustomField: this.getChildTypesFromCustomObject,
       CompactLayout: this.getChildTypesFromCustomObject,
       Document: this.getTypesFromFolder,
@@ -338,7 +338,15 @@ class MetadataTypeParser {
   }
 
   customLabelProcessor(type, folderContentList, folderType) {
-    const customLabelPath = `${this.projectPath}/${this.packageName}/${folderType}/CustomLabels.labels`;
+    const customLabelPathOLD = `${this.projectPath}/${this.packageName}/${folderType}/CustomLabels.labels`;
+    const isExist1 = fs.existsSync(`${customLabelPathOLD}/package.xml`);
+    console.log('customLabelProcessor isExist1 ' + isExist1);
+
+    const packageNameFolder = this.packageName.replaceAll(/\//g, "-");
+    const customLabelPath = `${this.projectPath}/${packageNameFolder}/${folderType}/CustomLabels.labels`;
+    const isExist2 = fs.existsSync(`${customLabelPath}/package.xml`);
+    console.log('customLabelProcessor isExist2 ' + isExist2);
+
     const xml = fs.readFileSync(customLabelPath)?.toString('utf8');
     const header = this.getHeader('CustomLabel');
     let fullLabelXML = '';
