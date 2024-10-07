@@ -183,45 +183,24 @@ class MetadataTypeParser {
   }
 
   parseMetadata() {
-    console.log('parseMetadata START ');
     this.init();
     if (!this.packageTypeMap || !this.packageName) {
       throw new Error('Please set properties \'packageTypeMap\' and \'packageName\'')
     }
-
-    console.log('parseMetadata [] packageTypeMap: ', this.packageTypeMap);
-    console.log('parseMetadata [] packageName: ', this.packageName);
-
     Object.values(this.packageTypeMap).forEach((type) => {
       const folderType = constants.METADATA_FOLDER_TYPE_MAP[type.type];
       const folderTypePath = `${this.projectPath}/${this.packageName}/${folderType}`;
-
-      console.log('--parseMetadata [] folderType: ', folderType);
-      console.log('--parseMetadata [] folderTypePath: ', folderTypePath);
-      const isExist1 = fs.existsSync(folderTypePath);
-      console.log('--parseMetadata [] isExist1: ', isExist1);
-
-      console.log('----parseMetadata start IF1');
       if (folderType && fs.existsSync(folderTypePath)) {
         const folderContentList = fs.readdirSync(folderTypePath, { withFileTypes: true });
-        console.log('----parseMetadata start IF2');
-        // console.log('----parseMetadata start IF2 type', type);
-        // console.log('----parseMetadata start IF2 type', type.type);
-        // console.log('----parseMetadata start IF2 this.functionMap[type.type]', this.functionMap[type.type]);
         if (this.functionMap[type.type]) {
           this.functionMap[type.type].call(this, type, folderContentList, folderType);
         } else {
-          console.log('----parseMetadata continue IF2 ELSE');
           this.log.log(`Unsupported Component Type ${type.type}. Handler Not Found.`);
         }
       } else {
-        console.log('----parseMetadata continue IF1 ELSE');
         this.log.log(`Unsupported Component Type ${type.type}. Folder Not Found.`);
       }
-      console.log('----parseMetadata end IF1');
 
-      // console.log('parseMetadata [] folderTypePath: ', folderTypePath);
-      // console.log('parseMetadata [] folderTypePath: ', folderTypePath);
       const zipBuffer = this.zip.toBuffer().toString('base64');
       if (zipBuffer !== 'UEsFBgAAAAAAAAAAAAAAAAAAAAAAAA==') {
         this.chunkList[this.chunkCounter].typeList.push({ componentList: this.componentList, type: type.type, zip: zipBuffer });
@@ -232,8 +211,6 @@ class MetadataTypeParser {
       this.count = 0;
     });
 
-    console.log('parseMetadata END ');
-
     return this.chunkList;
   }
 
@@ -243,7 +220,7 @@ class MetadataTypeParser {
     // const typePath = `${this.projectPath}/${this.packageName}/${folderType}`;
 
     //  Case 00015574
-    let packageNameFolder = this.packageName.replaceAll(/\//g, "-");
+    const packageNameFolder = this.packageName.replaceAll(/\//g, "-");
     const typePath = `${this.projectPath}/${packageNameFolder}/${folderType}`;
 
     type.componentList.forEach((component) => {
@@ -282,15 +259,7 @@ class MetadataTypeParser {
   // Role, QuickAction, Queue, PathAssistant, CustomObjectTranslation, CustomNotificationType,
   // LightningExperienceTheme, Group, CustomMetadata, ContentAsset, CustomApplication
   getDefaultTypes(type, folderContentList, folderType){
-
-    console.log('metadataTypeParser [getDefaultTypes] ');
-
     const typePath = `${this.projectPath}/${this.packageName}/${folderType}`;
-
-    //  Case 00015574
-    let packageNameFolder = this.packageName.replaceAll(/\//g, "-");
-    const typePathCorrected = `${this.projectPath}/${packageNameFolder}/${folderType}`;
-
     type.componentList.forEach((component) => {
       folderContentList.forEach((content) => {
         const objectExtend = path.parse(content.name)
@@ -310,23 +279,10 @@ class MetadataTypeParser {
       this.componentList.push(component);
       this.count++;
       component.fileList.forEach((file) => {
-
-        console.log('metadataTypeParser [getDefaultTypes] file: ', file);
-        console.log('metadataTypeParser [getDefaultTypes] component.isDirectory: ', component.isDirectory);
-
         this.size += fs.statSync(`${typePath}/${file}`).size;
         if (component.isDirectory) {
-          console.log('metadataTypeParser [getDefaultTypes addLocalFolder] typePath: ', typePath);
-          console.log('metadataTypeParser [getDefaultTypes addLocalFolder] typePathCorrected: ', typePathCorrected);
-          console.log('metadataTypeParser [getDefaultTypes addLocalFolder] file: ', file);
-          console.log('metadataTypeParser [getDefaultTypes addLocalFolder] folderType: ', folderType);
-          // this.zip.addLocalFolder(`${typePathCorrected}/${file}`, `${folderType}/${file}`);   //  Case 00015574
-          this.zip.addLocalFolder(`${typePath}/${file}`, `${folderType}/${file}`);   //  Case 00015574
+          this.zip.addLocalFolder(`${typePath}/${file}`, `${folderType}/${file}`);
         } else {
-          console.log('metadataTypeParser [getDefaultTypes addLocalFile] typePath: ', typePath);
-          console.log('metadataTypeParser [getDefaultTypes addLocalFile] typePathCorrected: ', typePathCorrected);
-          console.log('metadataTypeParser [getDefaultTypes addLocalFile] file: ', file);
-          console.log('metadataTypeParser [getDefaultTypes addLocalFile] folderType: ', folderType);
           this.zip.addLocalFile(`${typePath}/${file}`, folderType);
         }
       });
@@ -381,13 +337,7 @@ class MetadataTypeParser {
   }
 
   customLabelProcessor(type, folderContentList, folderType) {
-
     const customLabelPath = `${this.projectPath}/${this.packageName}/${folderType}/CustomLabels.labels`;
-
-    //  Case 00015574
-    // let packageNameFolder = this.packageName.replaceAll(/\//g, "-");
-    // const customLabelPath = `${this.projectPath}/${packageNameFolder}/${folderType}/CustomLabels.labels`;
-
     const xml = fs.readFileSync(customLabelPath)?.toString('utf8');
     const header = this.getHeader('CustomLabel');
     let fullLabelXML = '';

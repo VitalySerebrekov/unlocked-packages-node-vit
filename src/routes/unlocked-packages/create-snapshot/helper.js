@@ -12,7 +12,7 @@ function retrievePackages(accessToken, projectName, packageName, dependencyList,
     try {
 
       //  Case 00015574
-      let packageNameFolder = packageName.replaceAll(/\//g, "-");
+      const packageNameFolder = packageName.replaceAll(/\//g, "-");
 
       log.log('Start Retrieve Packages');
       try {
@@ -84,7 +84,7 @@ function unzipPackages(projectName, packageName, dependencyList, log) {
           // return storage.unzip(`${projectName}/${packageName}/${constants.ZIP_PACKAGE_NAME}`, projectName, log);
 
           //  Case 00015574
-          let packageNameFolder = packageName.replaceAll(/\//g, "-");
+          const packageNameFolder = packageName.replaceAll(/\//g, "-");
           return storage.unzip(`${projectName}/${packageNameFolder}/${constants.ZIP_PACKAGE_NAME}`, projectName, log);
 
         })
@@ -250,11 +250,6 @@ function createZipComponents(projectPath, packageName, dependencyList, packageMa
   return new Promise((resolve, reject) => {
     try {
       log.log('Start Create Zip Components');
-
-      console.log('helper.js [createZipComponents] projectPath: ', projectPath);
-      console.log('helper.js [createZipComponents] packageName: ', packageName);
-      console.log('helper.js [createZipComponents] dependencyList: ', dependencyList);
-      console.log('helper.js [createZipComponents] packageMap: ', packageMap);
 
       dependencyList.push(packageName);
       let metadataTypeParser = new MetadataTypeParser(projectPath, log);
