@@ -399,6 +399,9 @@ class MetadataTypeParser {
       var finalXML2 = xmlFormat(finalXML);
       console.log('finalXML2: ' + finalXML2);
 
+      var finalXML666 = xmlFormat(finalXML, {collapseContent: true, lineSeparator: '\n'});
+      console.log('finalXML666: ' + finalXML666);
+
     }
   }
 
