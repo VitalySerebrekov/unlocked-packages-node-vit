@@ -13,6 +13,7 @@ function createSnapshot(body, log) {
       const sourceUrl = body.sourceUrl;
       const sourceAccessToken = body.sourceAccessToken;
       const packageName = body.packageName;
+      const packageNameFolder = packageName.replaceAll(/\//g, '-');   //  Case 00015574  (Unable to retrieve unlocked package components)
       const namespacePrefix = body.namespacePrefix;
       const metadataLogId = body.metadataLogId;
       const logAttachmentId = body.logAttachmentId;
@@ -34,8 +35,8 @@ function createSnapshot(body, log) {
         .then(() => storage.createProjectDirectory(projectName, log))
         .then(() => storage.createSFDXProjectJSON(projectName, log))
         .then(() => storage.setInstanceUrl(projectName, instanceUrl.replace('https://', ''), log))
-        .then(() => helper.retrievePackages(accessToken, projectName, packageName, dependencyList, log))
-        .then(() => helper.unzipPackages(projectName, packageName, dependencyList, log))
+        .then(() => helper.retrievePackages(accessToken, projectName, packageName, packageNameFolder, dependencyList, log))
+        .then(() => helper.unzipPackages(projectName, packageName, packageNameFolder, dependencyList, log))
         .then(() => helper.getComponentTypesFromPackageXML(projectName, packageName, dependencyList, log))
         .then((packageMap) => helper.getMetadataInfo(accessToken, projectName, packageMap, log))
         .then((result) => helper.mergeComponentsWithMetadataInfo(result.metadataInfoMap, result.packageMap, log))

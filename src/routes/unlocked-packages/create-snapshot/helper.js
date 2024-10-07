@@ -7,19 +7,16 @@ const childProcess = require('../../../services/child-process');
 const storage = require('../../../services/storage');
 const { MetadataTypeParser } = require('./metadataTypeParser');
 
-function retrievePackages(accessToken, projectName, packageName, dependencyList, log) {
+function retrievePackages(accessToken, projectName, packageName, packageNameFolder, dependencyList, log) {
   return new Promise((resolve, reject) => {
     try {
-
-      //  Case 00015574
-      const packageNameFolder = packageName.replaceAll(/\//g, '-');
 
       log.log('Start Retrieve Packages');
       try {
 
-        //  Case 00015574
-        fs.mkdirSync(`./${projectName}/${packageNameFolder}`);
+        //  Case 00015574 (Unable to retrieve unlocked package components)
         // fs.mkdirSync(`./${projectName}/${packageName}`);
+        fs.mkdirSync(`./${projectName}/${packageNameFolder}`);
 
       } catch (e) {
         log.log('Error Create Package Directory ' + e);
@@ -30,7 +27,7 @@ function retrievePackages(accessToken, projectName, packageName, dependencyList,
         .then(() => {
           log.log('Start Retrieve Package ' + packageName);
 
-          //  Case 00015574
+          //  Case 00015574 (Unable to retrieve unlocked package components)
           return childProcess.call(
             constants.getSFDXRetrievePackage(accessToken, packageName),
             log,
@@ -71,7 +68,7 @@ function retrievePackages(accessToken, projectName, packageName, dependencyList,
   });
 }
 
-function unzipPackages(projectName, packageName, dependencyList, log) {
+function unzipPackages(projectName, packageName, packageNameFolder, dependencyList, log) {
   return new Promise((resolve, reject) => {
     try {
       log.log('Start Unzip Packages');
@@ -81,10 +78,8 @@ function unzipPackages(projectName, packageName, dependencyList, log) {
         .then(() => {
           log.log('Start Unzip Package ' + packageName);
 
+          //  Case 00015574 (Unable to retrieve unlocked package components)
           // return storage.unzip(`${projectName}/${packageName}/${constants.ZIP_PACKAGE_NAME}`, projectName, log);
-
-          //  Case 00015574
-          const packageNameFolder = packageName.replaceAll(/\//g, '-');
           return storage.unzip(`${projectName}/${packageNameFolder}/${constants.ZIP_PACKAGE_NAME}`, projectName, log);
 
         })
