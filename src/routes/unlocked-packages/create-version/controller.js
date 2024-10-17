@@ -29,7 +29,7 @@ function createUnlockedPackageVersion(body, log) {
       .then(() => childProcess.call(
         constants.getSFDXConvertMetadata(`./${constants.UNZIP_CATALOG_NAME}`),
         log,
-        { cwd: `./${projectName}`, maxBuffer: 1024 * 21000 },
+        { cwd: `./${projectName}`, maxBuffer: 1024 * 500 },
       ))
       .then(() => helper.addSFDXPackage(projectName, body.sfdxProject, log))
       .then(() => {
@@ -38,7 +38,7 @@ function createUnlockedPackageVersion(body, log) {
           return childProcess.call(
             constants.getSFDXCreateUnlockedPackageVersion(body.packageName, body.sessionId, body.versionKey, body.versionName, body.description, body.versionNumber),
             log,
-            { cwd: `./${projectName}`, maxBuffer: 1024 * 21000 },
+            { cwd: `./${projectName}`, maxBuffer: 1024 * 500 },
           );
         }
         log.log('Test Mode');

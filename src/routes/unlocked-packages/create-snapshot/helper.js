@@ -7,12 +7,17 @@ const childProcess = require('../../../services/child-process');
 const storage = require('../../../services/storage');
 const { MetadataTypeParser } = require('./metadataTypeParser');
 
-function retrievePackages(accessToken, projectName, packageName, dependencyList, log) {
+function retrievePackages(accessToken, projectName, packageName, packageNameFolder, dependencyList, log) {
   return new Promise((resolve, reject) => {
     try {
+
       log.log('Start Retrieve Packages');
       try {
-        fs.mkdirSync(`./${projectName}/${packageName}`);
+
+        //  Case 00015574 (Unable to retrieve unlocked package components)
+        // fs.mkdirSync(`./${projectName}/${packageName}`);
+        fs.mkdirSync(`./${projectName}/${packageNameFolder}`);
+
       } catch (e) {
         log.log('Error Create Package Directory ' + e);
         reject(e);
@@ -21,12 +26,21 @@ function retrievePackages(accessToken, projectName, packageName, dependencyList,
       promiseChain = promiseChain
         .then(() => {
           log.log('Start Retrieve Package ' + packageName);
+
+          //  Case 00015574 (Unable to retrieve unlocked package components)
           return childProcess.call(
             constants.getSFDXRetrievePackage(accessToken, packageName),
             log,
-            { cwd: `./${projectName}/${packageName}`,
-              maxBuffer: 1024 * 21000
+            { cwd: `./${projectName}/${packageNameFolder}`,
+              maxBuffer: 1024 * 500
             })
+
+          // return childProcess.call(
+          //   constants.getSFDXRetrievePackage(accessToken, packageName),
+          //   log,
+          //   { cwd: `./${projectName}/${packageName}`,
+          //     maxBuffer: 1024 * 500
+          //   })
         })
         .then(() => log.log('End Retrieve Package ' + packageName));
 
@@ -54,7 +68,7 @@ function retrievePackages(accessToken, projectName, packageName, dependencyList,
   });
 }
 
-function unzipPackages(projectName, packageName, dependencyList, log) {
+function unzipPackages(projectName, packageName, packageNameFolder, dependencyList, log) {
   return new Promise((resolve, reject) => {
     try {
       log.log('Start Unzip Packages');
@@ -63,7 +77,11 @@ function unzipPackages(projectName, packageName, dependencyList, log) {
       promiseChain = promiseChain
         .then(() => {
           log.log('Start Unzip Package ' + packageName);
-          return storage.unzip(`${projectName}/${packageName}/${constants.ZIP_PACKAGE_NAME}`, projectName, log)
+
+          //  Case 00015574 (Unable to retrieve unlocked package components)
+          // return storage.unzip(`${projectName}/${packageName}/${constants.ZIP_PACKAGE_NAME}`, projectName, log);
+          return storage.unzip(`${projectName}/${packageNameFolder}/${constants.ZIP_PACKAGE_NAME}`, projectName, log);
+
         })
         .then(() => log.log('End Unzip Package ' + packageName));
 
@@ -166,7 +184,7 @@ function getMetadataInfo(accessToken, projectName, packageMap, log) {
               .then(() => childProcess.call(
                 constants.getSFDXMetadataInfo(componentType.type, accessToken),
                 log,
-                { cwd: `./${projectName}`, maxBuffer: 1024 * 21000 },
+                { cwd: `./${projectName}`, maxBuffer: 1024 * 8000 },
                 false,
                 false
               ))

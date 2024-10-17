@@ -13,10 +13,10 @@ function call(command, log, options = {}, isCreateProject = false, isShowLogs = 
               resolve(constants.PACKAGE_WITH_THIS_NAME_IS_EXIST);
             }
           }
-          log.log(`Error Call Child Process1 ${command.split('-u')[0]}\n${e}\n${stdout}`);
+          log.log(`Error Call Child Process ${command.split('-u')[0]}\n${e}\n${stdout}`);
           reject(e);
         } else {
-          log.log(`End Call Child Process2 ${command.split('-u')[0]}`);
+          log.log(`End Call Child Process ${command.split('-u')[0]}`);
           if (isShowLogs) {
             log.log(stdout);
           }
@@ -24,7 +24,7 @@ function call(command, log, options = {}, isCreateProject = false, isShowLogs = 
         }
       }));
     } catch (e) {
-      log.log(`Error Call Child Process3 ${command.split('-u')[0]}\n${e}`);
+      log.log(`Error Call Child Process ${command.split('-u')[0]}\n${e}`);
       reject(e);
     }
   });

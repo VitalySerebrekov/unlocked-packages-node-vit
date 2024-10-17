@@ -122,7 +122,7 @@ function getSFDXMetadataInfo(componentType, accessToken) {
 }
 
 const METADATA_FOLDER_TYPE_MAP = {
-  // "CustomLabels": "labels", In filter set
+  // "CustomLabels": "labels",  //  In filter set
 
   "ApexClass": "classes",
   "ApexComponent": "components",
