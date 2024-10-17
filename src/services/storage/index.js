@@ -18,7 +18,6 @@ function setInstanceUrl(projectName, domain, log) {
           reject(err);
         }
         log.log('End Set Instance Url');
-        // log.log(`End Set Instance Url\n${sfdxConfig}`);
         resolve();
       }));
     } catch (e) {
