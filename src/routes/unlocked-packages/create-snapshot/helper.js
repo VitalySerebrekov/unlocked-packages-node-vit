@@ -25,7 +25,7 @@ function retrievePackages(accessToken, projectName, packageName, dependencyList,
             constants.getSFDXRetrievePackage(accessToken, packageName),
             log,
             { cwd: `./${projectName}/${packageName}`,
-              maxBuffer: 1024 * 8000
+              maxBuffer: 1024 * 21000
             })
         })
         .then(() => log.log('End Retrieve Package ' + packageName));
