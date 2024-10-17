@@ -26,7 +26,7 @@ function createUnlockedPackage(body, log) {
       .then(() => childProcess.call(
         constants.getSFDXCreateUnlockedPackage(body.packageName, body.sessionId, body.description),
         log,
-        { cwd: `./${projectName}`, maxBuffer: 1024 * 500 },
+        { cwd: `./${projectName}`, maxBuffer: 1024 * 21000 },
         true,
       ))
       .then((stdout) => {
