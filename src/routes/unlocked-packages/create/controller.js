@@ -22,11 +22,11 @@ function createUnlockedPackage(body, log) {
           }
         }))
       .then(() => storage.setInstanceUrl(projectName, body.domain, log))
-      // Create Project
+      // Create Project //  1024 = 1kb    //  1024 * 1024 = 1mb   //  1024 * 1024 * 1024 = 1gb  //  result 1024 * 1024 * 340 (1gb devided on 3)
       .then(() => childProcess.call(
         constants.getSFDXCreateUnlockedPackage(body.packageName, body.sessionId, body.description),
         log,
-        { cwd: `./${projectName}`, maxBuffer: 1024 * 500 },
+        { cwd: `./${projectName}`, maxBuffer: 1024 * 1024 * 340 },
         true,
       ))
       .then((stdout) => {

@@ -19,7 +19,7 @@ function getInstalledPackageList(body, log) {
         .then(() => childProcess.call(
           constants.getSFDXInstalledPackageList(accessToken),
           log,
-          { cwd: `./${projectName}`, maxBuffer: 1024 * 500 },
+          { cwd: `./${projectName}`, maxBuffer: 1024 * 1024 * 340 },
           false,
           false
           ))

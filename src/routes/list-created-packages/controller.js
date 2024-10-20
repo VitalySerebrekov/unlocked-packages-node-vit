@@ -14,7 +14,7 @@ function getCreatedPackageList(body, log) {
         .then(() => storage.createProjectDirectory(projectName, log))
         .then(() => storage.createSFDXProjectJSON(projectName, log))
         .then(() => storage.setInstanceUrl(projectName, instanceUrl.replace('https://', ''), log))
-        .then(() => childProcess.call(constants.getSFDXCreatedPackageList(accessToken), log, { cwd: `./${projectName}`, maxBuffer: 1024 * 500 }))
+        .then(() => childProcess.call(constants.getSFDXCreatedPackageList(accessToken), log, { cwd: `./${projectName}`, maxBuffer: 1024 * 1024 * 340 }))
         .then(resolve)
         .catch(reject)
         .then(() => storage.removeProject(projectName, log));

@@ -32,7 +32,7 @@ function retrievePackages(accessToken, projectName, packageName, packageNameFold
             constants.getSFDXRetrievePackage(accessToken, packageName),
             log,
             { cwd: `./${projectName}/${packageNameFolder}`,
-              maxBuffer: 1024 * 500
+              maxBuffer: 1024 * 1024 * 340
             })
 
           // return childProcess.call(
@@ -184,7 +184,7 @@ function getMetadataInfo(accessToken, projectName, packageMap, log) {
               .then(() => childProcess.call(
                 constants.getSFDXMetadataInfo(componentType.type, accessToken),
                 log,
-                { cwd: `./${projectName}`, maxBuffer: 1024 * 8000 },
+                { cwd: `./${projectName}`, maxBuffer: 1024 * 1024 * 340 },
                 false,
                 false
               ))
