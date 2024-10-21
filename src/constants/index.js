@@ -29,6 +29,7 @@ const SOURCE_OBJECT_DEPLOYMENT = 'Patch_Manifest__c';
 const SOURCE_OBJECT_BRANCH = 'Component__c';
 const ZIP_PACKAGE_NAME = 'unpackaged.zip';
 const MAX_SIZE_UNZIP_ATTACHMENT = 2500000;
+const MAX_BUFFER_SIZE = 1024 * 1024 * 340;
 const QUERY_INSTALLED_UNLOCKED_PACKAGE_LIST = 'SELECT+SubscriberPackage.Name,+SubscriberPackageVersion.Dependencies,+SubscriberPackageVersion.Package2ContainerOptions+FROM+InstalledSubscriberPackage';
 const QUERY_INSTALLED_UNLOCKED_PACKAGE_LIST_WITHOUT_DEPEND = 'SELECT+SubscriberPackage.Name,+SubscriberPackageVersion.Package2ContainerOptions,SubscriberPackageVersionId+FROM+InstalledSubscriberPackage';
 
@@ -301,6 +302,7 @@ module.exports = {
   SFDX_PROJECT_EXAMPLE,
   ZIP_PACKAGE_NAME,
   MAX_SIZE_UNZIP_ATTACHMENT,
+  MAX_BUFFER_SIZE,
   QUERY_INSTALLED_UNLOCKED_PACKAGE_LIST,
   QUERY_INSTALLED_UNLOCKED_PACKAGE_LIST_WITHOUT_DEPEND,
   getDependencyQuery,
