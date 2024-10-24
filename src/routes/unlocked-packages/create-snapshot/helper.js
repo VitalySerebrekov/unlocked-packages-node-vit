@@ -123,6 +123,8 @@ function getComponentTypesFromPackageXML(projectPath, packageName, dependencyLis
         const packageXML = fs.readFileSync(`${projectPath}/${packName}/package.xml`);
         const packageJSON = await parser.parseStringPromise(packageXML);
 
+        console.log('getComponentTypesFromPackageXML packageJSON: ', packageJSON);
+
         if (!Array.isArray(packageJSON.Package.types)) {
           packageJSON.Package.types = [packageJSON.Package.types];
         }
