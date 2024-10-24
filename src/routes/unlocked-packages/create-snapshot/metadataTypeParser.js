@@ -243,7 +243,8 @@ class MetadataTypeParser {
       if (component.componentType === 'EmailTemplate') {
         const folderXML = componentFolderPath + '.emailFolder-meta.xml';
         console.log('getTypesFromFolder folderXML: ', folderXML);
-        // const folderXML = fs.readFileSync(`${componentFolderPath}.emailFolder-meta.xml`);
+        const folderXMLFile = fs.readFileSync(`${componentFolderPath}.emailFolder-meta.xml`);
+        console.log('getTypesFromFolder folderXMLFile: ', folderXMLFile);
         // this.zip.addFile(`${folderType}/CustomLabels.labels`, full);
       }
 
@@ -252,7 +253,7 @@ class MetadataTypeParser {
       if (fs.existsSync(componentFolderPath)) {
         const folderComponentContentList = fs.readdirSync(componentFolderPath, { withFileTypes: true });
 
-        console.log('getTypesFromFolder folderComponentContentList: ', folderComponentContentList);
+        // console.log('getTypesFromFolder folderComponentContentList: ', folderComponentContentList);
 
         folderComponentContentList.forEach((content) => {
           if (`${componentFolder}/${content.name}`.includes(`${componentFile}.`)) {
