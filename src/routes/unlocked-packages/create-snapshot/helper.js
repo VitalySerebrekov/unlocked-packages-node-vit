@@ -127,8 +127,8 @@ function getComponentTypesFromPackageXML(projectPath, packageName, dependencyLis
           packageJSON.Package.types = [packageJSON.Package.types];
         }
 
-        console.log('getComponentTypesFromPackageXML packageJSON: ', packageJSON);
-        log.log('getComponentTypesFromPackageXML packageJSON: ' + packageJSON);
+        console.log('getComponentTypesFromPackageXML packageJSON1: ', packageJSON);
+        log.log('getComponentTypesFromPackageXML packageJSON2: ', packageJSON);
 
         packageJSON.Package.types.forEach((type) => createComponents(packageMap, type, packName));
       }
