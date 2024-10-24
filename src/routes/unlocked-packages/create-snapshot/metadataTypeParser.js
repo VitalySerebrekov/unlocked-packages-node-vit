@@ -230,6 +230,15 @@ class MetadataTypeParser {
       const componentFolder = componentPathList[0];
       const componentFile = componentPathList[1];
       const componentFolderPath = `${typePath}/${componentFolder}`
+
+      console.log('getTypesFromFolder component: ', component);
+      console.log('getTypesFromFolder component.apiName: ', component.apiName);
+      console.log('getTypesFromFolder componentPathList: ', componentPathList);
+      console.log('getTypesFromFolder componentFolder: ', componentFolder);
+      console.log('getTypesFromFolder componentFile: ', componentFile);
+      console.log('getTypesFromFolder componentFolderPath: ', componentFolderPath);
+
+
       if (fs.existsSync(componentFolderPath)) {
         const folderComponentContentList = fs.readdirSync(componentFolderPath, { withFileTypes: true });
         folderComponentContentList.forEach((content) => {
