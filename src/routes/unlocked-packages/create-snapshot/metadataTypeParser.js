@@ -224,6 +224,7 @@ class MetadataTypeParser {
 
   //Document, EmailTemplate, Report
   getTypesFromFolder(type, folderContentList, folderType) {
+    console.log('getTypesFromFolder -------- start -------');
     const typePath = `${this.projectPath}/${this.packageName}/${folderType}`;
     type.componentList.forEach((component) => {
       const componentPathList = component.apiName.split('/');
@@ -247,7 +248,7 @@ class MetadataTypeParser {
         folderComponentContentList.forEach((content) => {
           if (`${componentFolder}/${content.name}`.includes(`${componentFile}.`)) {
 
-            console.log('getTypesFromFolder componentFile: ', componentFile);
+            console.log('getTypesFromFolder componentFile5: ', componentFile);
 
             this.size += fs.statSync(`${componentFolderPath}/${content.name}`).size;
             this.zip.addLocalFile(`${componentFolderPath}/${content.name}`, `${folderType}/${componentFolder}`);
@@ -270,6 +271,7 @@ class MetadataTypeParser {
       delete component.isDirectory;
       delete component.fileList;
     });
+    console.log('getTypesFromFolder -------- end -------');
   }
 
   // ApexClass, ApexComponent, ApexPage, ApexTrigger, AppMenu, AuraDefinitionBundle,
