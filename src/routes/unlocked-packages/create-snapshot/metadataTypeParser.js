@@ -238,15 +238,24 @@ class MetadataTypeParser {
       console.log('getTypesFromFolder componentFile: ', componentFile);
       console.log('getTypesFromFolder componentFolderPath: ', componentFolderPath);
 
-
+      console.log('getTypesFromFolder fs.existsSync(componentFolderPath): ', fs.existsSync(componentFolderPath));
       if (fs.existsSync(componentFolderPath)) {
         const folderComponentContentList = fs.readdirSync(componentFolderPath, { withFileTypes: true });
+
+        console.log('getTypesFromFolder folderComponentContentList: ', folderComponentContentList);
+
         folderComponentContentList.forEach((content) => {
           if (`${componentFolder}/${content.name}`.includes(`${componentFile}.`)) {
+
+            console.log('getTypesFromFolder componentFile: ', componentFile);
+
             this.size += fs.statSync(`${componentFolderPath}/${content.name}`).size;
             this.zip.addLocalFile(`${componentFolderPath}/${content.name}`, `${folderType}/${componentFolder}`);
             if (!content.name.includes('-meta.xml')) {
               component.label = `${folderType}/${componentFolder}/${content.name}`;
+
+              console.log('getTypesFromFolder type.type: ', type.type);
+
               if (type.type === 'Document') {
                 component.apiName = `${componentFolder}/${content.name}`;
               }
