@@ -136,7 +136,7 @@ class MetadataTypeParser {
       CompactLayout: this.getChildTypesFromCustomObject,
       Document: this.getTypesFromFolder,
       EscalationRule: this.getChildTypesFromCustomObject,
-      EmailFolder: this.getDefaultTypes,
+      // EmailFolder: this.getDefaultTypes,
       EmailTemplate: this.getTypesFromFolder,
       FlexiPage: this.getDefaultTypes,
       Flow: this.getDefaultTypes,
@@ -236,8 +236,17 @@ class MetadataTypeParser {
       console.log('getTypesFromFolder component.apiName: ', component.apiName);
       console.log('getTypesFromFolder componentPathList: ', componentPathList);
       console.log('getTypesFromFolder componentFolder: ', componentFolder);
+      console.log('getTypesFromFolder folderType: ', folderType);
       console.log('getTypesFromFolder componentFile: ', componentFile);
       console.log('getTypesFromFolder componentFolderPath: ', componentFolderPath);
+
+      if (component.componentType === 'EmailTemplate') {
+        const folderXML = componentFolderPath + '.emailFolder-meta.xml';
+        console.log('getTypesFromFolder folderXML: ', folderXML);
+        // const folderXML = fs.readFileSync(`${componentFolderPath}.emailFolder-meta.xml`);
+        // this.zip.addFile(`${folderType}/CustomLabels.labels`, full);
+      }
+
 
       console.log('getTypesFromFolder fs.existsSync(componentFolderPath): ', fs.existsSync(componentFolderPath));
       if (fs.existsSync(componentFolderPath)) {
