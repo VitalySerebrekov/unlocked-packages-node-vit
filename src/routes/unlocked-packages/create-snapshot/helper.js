@@ -144,6 +144,8 @@ function getComponentTypesFromPackageXML(projectPath, packageName, dependencyLis
 }
 
 function createComponents(packageTypeMap, type, packageName) {
+  console.log('createComponents packageTypeMap: ', packageTypeMap);
+  console.log('createComponents type: ', type);
   if (!packageTypeMap[packageName]) {
     packageTypeMap[packageName] = {};
   }
