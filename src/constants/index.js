@@ -172,11 +172,11 @@ const METADATA_FOLDER_TYPE_MAP = {
   "DashboardFolder": "dashboardFolders",
   "DataCategoryGroup": "datacategorygroups",
   "DelegateGroup": "delegateGroups",
+  // "DocumentFolder": "documentFolders", //  ????
   "Document": "documents",
-  // "DocumentFolder": "documentFolders", ????
   "DuplicateRule": "duplicateRules",
+  "EmailFolder": "emailFolders", // ???
   "EmailTemplate": "email",
-  // "EmailFolder": "emailFolders", ???
   "EclairGeoData": "eclair",
   "EmailServicesFunction": "emailservices",
   "EmbeddedServiceBranding": "embeddedServiceBrandings",
