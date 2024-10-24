@@ -50,6 +50,8 @@ class MetadataTypeParser {
       EscalationRule: '<?xml version="1.0" encoding="UTF-8"?><EscalationRules xmlns="http://soap.sforce.com/2006/04/metadata">',
       MatchingRule: '<?xml version="1.0" encoding="UTF-8"?><MatchingRules xmlns="http://soap.sforce.com/2006/04/metadata">',
       ManagedTopic: '<?xml version="1.0" encoding="UTF-8"?><ManagedTopics xmlns="http://soap.sforce.com/2006/04/metadata">',
+      EmailFolder: '<?xml version="1.0" encoding="UTF-8"?><EmailFolder xmlns="http://soap.sforce.com/2006/04/metadata">',
+      EmailTemplate: '<?xml version="1.0" encoding="UTF-8"?><EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">',
       Other: '<?xml version="1.0" encoding="UTF-8"?><CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">'
     };
 
@@ -61,6 +63,8 @@ class MetadataTypeParser {
       WebLink: 'CustomObject',
       RecordType: 'CustomObject',
       FieldSet: 'CustomObject',
+      EmailFolder: 'EmailTemplate',
+      EmailTemplate: 'EmailTemplate',
       ValidationRule: 'CustomObject',
       BusinessProcess: 'CustomObject',
       SharingReason: 'CustomObject',
@@ -132,6 +136,7 @@ class MetadataTypeParser {
       CompactLayout: this.getChildTypesFromCustomObject,
       Document: this.getTypesFromFolder,
       EscalationRule: this.getChildTypesFromCustomObject,
+      EmailFolder: this.getDefaultTypes,
       EmailTemplate: this.getTypesFromFolder,
       FlexiPage: this.getDefaultTypes,
       Flow: this.getDefaultTypes,
