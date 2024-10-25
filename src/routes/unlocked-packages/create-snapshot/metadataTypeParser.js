@@ -239,8 +239,8 @@ class MetadataTypeParser {
       if (folderContentDirent.name.includes('-meta.xml')) {
         const folderXMLPath = folderPath + '/' + folderContentDirent.name;
         console.log('getFolderWithTypesFromFolder folderXMLPath: ', folderXMLPath);
-        console.log('getFolderWithTypesFromFolder ${componentFolderPath}/${content.name}: ' + `${componentFolderPath}/${content.name}`);
-        console.log('getFolderWithTypesFromFolder ${folderType}/${componentFolder}: ' + `${folderType}/${componentFolder}`);
+        // console.log('getFolderWithTypesFromFolder ${componentFolderPath}/${content.name}: ' + `${componentFolderPath}/${content.name}`);
+        // console.log('getFolderWithTypesFromFolder ${folderType}/${componentFolder}: ' + `${folderType}/${componentFolder}`);
 
         // this.zip.addLocalFile(`${componentFolderPath}/${content.name}`, `${folderType}/${componentFolder}`);
         //  starts with '<EmailFolder'
@@ -320,6 +320,9 @@ class MetadataTypeParser {
             this.size += fs.statSync(`${componentFolderPath}/${content.name}`).size;
             this.zip.addLocalFile(`${componentFolderPath}/${content.name}`, `${folderType}/${componentFolder}`);
             console.log('ZZZ: ' + `${componentFolderPath}/${content.name}`, `${folderType}/${componentFolder}`);
+            console.log('getTypesFromFolder ${componentFolderPath}/${content.name}: ' + `${componentFolderPath}/${content.name}`);
+            console.log('getTypesFromFolder ${folderType}/${componentFolder}: ' + `${folderType}/${componentFolder}`);
+
             if (!content.name.includes('-meta.xml')) {
               component.label = `${folderType}/${componentFolder}/${content.name}`;
 
