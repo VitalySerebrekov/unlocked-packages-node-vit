@@ -239,6 +239,8 @@ class MetadataTypeParser {
       if (folderContentDirent.name.includes('-meta.xml')) {
         const folderXMLPath = folderPath + '/' + folderContentDirent.name;
         console.log('getFolderWithTypesFromFolder folderXMLPath: ', folderXMLPath);
+        console.log('getFolderWithTypesFromFolder ${componentFolderPath}/${content.name}: ' + `${componentFolderPath}/${content.name}`);
+        console.log('getFolderWithTypesFromFolder ${folderType}/${componentFolder}: ' + `${folderType}/${componentFolder}`);
 
         // this.zip.addLocalFile(`${componentFolderPath}/${content.name}`, `${folderType}/${componentFolder}`);
         //  starts with '<EmailFolder'
