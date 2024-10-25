@@ -222,6 +222,11 @@ class MetadataTypeParser {
     return this.chunkList;
   }
 
+  //  EmailTemplate
+  // getTypesFromFolderAndFolder() {
+
+  // }
+
   //Document, EmailTemplate, Report
   getTypesFromFolder(type, folderContentList, folderType) {
     console.log('getTypesFromFolder -------- start -------');
@@ -239,9 +244,10 @@ class MetadataTypeParser {
       console.log('getTypesFromFolder folderType: ', folderType);
       console.log('getTypesFromFolder componentFile: ', componentFile);
       console.log('getTypesFromFolder componentFolderPath: ', componentFolderPath);
+      console.log('getTypesFromFolder folderContentList: ', folderContentList);
 
       if (component.componentType === 'EmailTemplate') {
-        const folderXML = componentFolderPath + '.emailFolder-meta.xml';
+        // const folderXML = componentFolderPath + '.emailFolder-meta.xml';
         // console.log('getTypesFromFolder folderXML: ', folderXML);
         // const folderXMLFile = fs.readFileSync(`${componentFolderPath}.emailFolder-meta.xml`);
         // console.log('getTypesFromFolder folderXMLFile: ', folderXMLFile);
@@ -252,13 +258,13 @@ class MetadataTypeParser {
         // const folderComponentContentListTemp = fs.readdirSync(componentFolderPath, { withFileTypes: true });
         // console.log('---getTypesFromFolder folderComponentContentListTemp: ', folderComponentContentListTemp);
 
-        const folderTypePathTemp = `${this.projectPath}/${this.packageName}/${folderType}`;
-        const folderTypePathListTemp = fs.readdirSync(folderTypePathTemp, { withFileTypes: true });
-        console.log('---getTypesFromFolder folderTypePathListTemp: ', folderTypePathListTemp);
+        // const folderTypePathTemp = `${this.projectPath}/${this.packageName}/${folderType}`;
+        // const folderTypePathListTemp = fs.readdirSync(folderTypePathTemp, { withFileTypes: true });
+        // console.log('---getTypesFromFolder folderTypePathListTemp: ', folderTypePathListTemp);
       }
 
 
-      console.log('getTypesFromFolder fs.existsSync(componentFolderPath): ', fs.existsSync(componentFolderPath));
+      // console.log('getTypesFromFolder fs.existsSync(componentFolderPath): ', fs.existsSync(componentFolderPath));
       if (fs.existsSync(componentFolderPath)) {
         const folderComponentContentList = fs.readdirSync(componentFolderPath, { withFileTypes: true });
 
@@ -267,14 +273,14 @@ class MetadataTypeParser {
         folderComponentContentList.forEach((content) => {
           if (`${componentFolder}/${content.name}`.includes(`${componentFile}.`)) {
 
-            console.log('getTypesFromFolder componentFile5: ', componentFile);
+            // console.log('getTypesFromFolder componentFile5: ', componentFile);
 
             this.size += fs.statSync(`${componentFolderPath}/${content.name}`).size;
             this.zip.addLocalFile(`${componentFolderPath}/${content.name}`, `${folderType}/${componentFolder}`);
             if (!content.name.includes('-meta.xml')) {
               component.label = `${folderType}/${componentFolder}/${content.name}`;
 
-              console.log('getTypesFromFolder type.type: ', type.type);
+              // console.log('getTypesFromFolder type.type: ', type.type);
 
               if (type.type === 'Document') {
                 component.apiName = `${componentFolder}/${content.name}`;
