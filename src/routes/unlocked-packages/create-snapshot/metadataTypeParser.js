@@ -242,7 +242,10 @@ class MetadataTypeParser {
         // console.log('getFolderWithTypesFromFolder ${componentFolderPath}/${content.name}: ' + `${componentFolderPath}/${content.name}`);
         // console.log('getFolderWithTypesFromFolder ${folderType}/${componentFolder}: ' + `${folderType}/${componentFolder}`);
 
-        // this.zip.addLocalFile(`${componentFolderPath}/${content.name}`, `${folderType}/${componentFolder}`);
+
+        //  create_snapshot_1729854153869/OCPAARobo1/email/SRAdvancedApprovalTemplateC2/SRAdvancedApprovalTemplateC21.email-meta.xml
+        //  email/SRAdvancedApprovalTemplateC2
+        this.zip.addLocalFile(`${folderXMLPath}`, `${folderType}`);   //  retrieved => new ZIP component
         //  starts with '<EmailFolder'
       }
     });
