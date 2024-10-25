@@ -317,6 +317,7 @@ class MetadataTypeParser {
 
             this.size += fs.statSync(`${componentFolderPath}/${content.name}`).size;
             this.zip.addLocalFile(`${componentFolderPath}/${content.name}`, `${folderType}/${componentFolder}`);
+            console.log('ZZZ: ' + `${componentFolderPath}/${content.name}`, `${folderType}/${componentFolder}`);
             if (!content.name.includes('-meta.xml')) {
               component.label = `${folderType}/${componentFolder}/${content.name}`;
 
