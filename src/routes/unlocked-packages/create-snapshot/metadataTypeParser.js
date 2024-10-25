@@ -262,12 +262,15 @@ class MetadataTypeParser {
         // const folderTypePathListTemp = fs.readdirSync(folderTypePathTemp, { withFileTypes: true });
         // console.log('---getTypesFromFolder folderTypePathListTemp: ', folderTypePathListTemp);
 
-        folderContentList.forEach((folderContent) => {
-          if (folderContent.name.includes('-meta.xml')) {
-            console.log('getTypesFromFolder folderContent.name: ', folderContent.name);
-            const folderXMLFile = folderContentList.parentPath + '/' + folderContentList.name;
-            console.log('getTypesFromFolder folderXMLFile: ', folderXMLFile);
-          }
+        folderContentList.forEach((folderContentDirent) => {
+
+          console.log('getTypesFromFolder folderContentDirent: ', folderContentDirent);
+
+          // if (folderContent.name.includes('-meta.xml')) {
+          //   console.log('getTypesFromFolder folderContent.name: ', folderContent.name);
+          //   const folderXMLFile = folderContentList.parentPath + '/' + folderContentList.name;
+          //   console.log('getTypesFromFolder folderXMLFile: ', folderXMLFile);
+          // }
         });
       }
 
