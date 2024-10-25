@@ -225,7 +225,7 @@ class MetadataTypeParser {
 
   //  EmailTemplate
   getFolderWithTypesFromFolder(type, folderContentList, folderType) {
-    getTypesFromFolder(type, folderContentList, folderType);
+    this.getTypesFromFolder(type, folderContentList, folderType);
   }
 
   //Document, EmailTemplate, Report
