@@ -225,6 +225,19 @@ class MetadataTypeParser {
 
   //  EmailTemplate
   getFolderWithTypesFromFolder(type, folderContentList, folderType) {
+
+    folderContentList.forEach((folderContentDirent) => {
+
+      // console.log('getTypesFromFolder folderContentDirent: ', folderContentDirent);
+
+      if (folderContentDirent.name.includes('-meta.xml')) {
+        const folderXMLPath = folderContentDirent.parentPath + '/' + folderContentDirent.name;
+        console.log('getFolderWithTypesFromFolder folderXMLPath: ', folderXMLPath);
+
+        //  starts with '<EmailFolder'
+      }
+    });
+
     this.getTypesFromFolder(type, folderContentList, folderType);
   }
 
@@ -238,13 +251,13 @@ class MetadataTypeParser {
       const componentFile = componentPathList[1];
       const componentFolderPath = `${typePath}/${componentFolder}`
 
-      console.log('getTypesFromFolder component: ', component);
-      console.log('getTypesFromFolder component.apiName: ', component.apiName);
-      console.log('getTypesFromFolder componentPathList: ', componentPathList);
-      console.log('getTypesFromFolder componentFolder: ', componentFolder);
-      console.log('getTypesFromFolder folderType: ', folderType);
-      console.log('getTypesFromFolder componentFile: ', componentFile);
-      console.log('getTypesFromFolder componentFolderPath: ', componentFolderPath);
+      // console.log('getTypesFromFolder component: ', component);
+      // console.log('getTypesFromFolder component.apiName: ', component.apiName);
+      // console.log('getTypesFromFolder componentPathList: ', componentPathList);
+      // console.log('getTypesFromFolder componentFolder: ', componentFolder);
+      // console.log('getTypesFromFolder folderType: ', folderType);
+      // console.log('getTypesFromFolder componentFile: ', componentFile);
+      // console.log('getTypesFromFolder componentFolderPath: ', componentFolderPath);
       // console.log('getTypesFromFolder folderContentList: ', folderContentList);
 
       if (component.componentType === 'EmailTemplate') {
@@ -263,16 +276,16 @@ class MetadataTypeParser {
         // const folderTypePathListTemp = fs.readdirSync(folderTypePathTemp, { withFileTypes: true });
         // console.log('---getTypesFromFolder folderTypePathListTemp: ', folderTypePathListTemp);
 
-        folderContentList.forEach((folderContentDirent) => {
+        // folderContentList.forEach((folderContentDirent) => {
 
-          // console.log('getTypesFromFolder folderContentDirent: ', folderContentDirent);
+        //   // console.log('getTypesFromFolder folderContentDirent: ', folderContentDirent);
 
-          if (folderContentDirent.name.includes('-meta.xml')) {
-            const folderXMLFile = folderContentDirent.parentPath + '/' + folderContentDirent.name;
-            console.log('getTypesFromFolder folderXMLFile: ', folderXMLFile);
+        //   if (folderContentDirent.name.includes('-meta.xml')) {
+        //     const folderXMLFile = folderContentDirent.parentPath + '/' + folderContentDirent.name;
+        //     console.log('getTypesFromFolder folderXMLFile: ', folderXMLFile);
 
-            //  starts with '<EmailFolder'
-          }
+        //     //  starts with '<EmailFolder'
+        //   }
 
 
           // if (folderContent.name.includes('-meta.xml')) {
@@ -280,7 +293,7 @@ class MetadataTypeParser {
           //   const folderXMLFile = folderContentList.parentPath + '/' + folderContentList.name;
           //   console.log('getTypesFromFolder folderXMLFile: ', folderXMLFile);
           // }
-        });
+        // });
       }
 
 
