@@ -247,8 +247,14 @@ class MetadataTypeParser {
         // console.log('getTypesFromFolder folderXMLFile: ', folderXMLFile);
         // this.zip.addFile(`${folderType}/CustomLabels.labels`, full);
 
-        const folderComponentContentListTemp = fs.readdirSync(componentFolderPath, { withFileTypes: true });
-        console.log('---getTypesFromFolder folderComponentContentListTemp: ', folderComponentContentListTemp);
+        //  remove last /SRAdvancedApprovalTemplateC2
+        //  remove last /SRAdvancedApprovalTemplateC1
+        // const folderComponentContentListTemp = fs.readdirSync(componentFolderPath, { withFileTypes: true });
+        // console.log('---getTypesFromFolder folderComponentContentListTemp: ', folderComponentContentListTemp);
+
+        const folderTypePathTemp = `${this.projectPath}/${this.packageName}/${folderType}`;
+        const folderTypePathListTemp = fs.readdirSync(folderTypePathTemp, { withFileTypes: true });
+        console.log('---getTypesFromFolder folderTypePathListTemp: ', folderTypePathListTemp);
       }
 
 
