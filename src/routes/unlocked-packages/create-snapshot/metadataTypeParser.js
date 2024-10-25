@@ -226,18 +226,18 @@ class MetadataTypeParser {
   //  EmailTemplate
   getFolderWithTypesFromFolder(type, folderContentList, folderType) {
 
-    const generalFolderPath = `${this.projectPath}/${this.packageName}/${folderType}`;
-    console.log('getFolderWithTypesFromFolder this.projectPath: ', this.projectPath);
-    console.log('getFolderWithTypesFromFolder this.packageName: ', this.packageName);
-    console.log('getFolderWithTypesFromFolder folderType: ', folderType);
-    console.log('getFolderWithTypesFromFolder generalFolderPath: ', generalFolderPath);
+    const folderPath = `${this.projectPath}/${this.packageName}/${folderType}`;
+    // console.log('getFolderWithTypesFromFolder this.projectPath: ', this.projectPath);
+    // console.log('getFolderWithTypesFromFolder this.packageName: ', this.packageName);
+    // console.log('getFolderWithTypesFromFolder folderType: ', folderType);
+    console.log('getFolderWithTypesFromFolder folderPath: ', folderPath);
 
     folderContentList.forEach((folderContentDirent) => {
 
       // console.log('getTypesFromFolder folderContentDirent: ', folderContentDirent);
 
       if (folderContentDirent.name.includes('-meta.xml')) {
-        const folderXMLPath = folderContentDirent.parentPath + '/' + folderContentDirent.name;
+        const folderXMLPath = folderPath + '/' + folderContentDirent.name;
         console.log('getFolderWithTypesFromFolder folderXMLPath: ', folderXMLPath);
 
         // this.zip.addLocalFile(`${componentFolderPath}/${content.name}`, `${folderType}/${componentFolder}`);
