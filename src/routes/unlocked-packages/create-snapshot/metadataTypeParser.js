@@ -244,7 +244,7 @@ class MetadataTypeParser {
       console.log('getTypesFromFolder folderType: ', folderType);
       console.log('getTypesFromFolder componentFile: ', componentFile);
       console.log('getTypesFromFolder componentFolderPath: ', componentFolderPath);
-      console.log('getTypesFromFolder folderContentList: ', folderContentList);
+      // console.log('getTypesFromFolder folderContentList: ', folderContentList);
 
       if (component.componentType === 'EmailTemplate') {
         // const folderXML = componentFolderPath + '.emailFolder-meta.xml';
@@ -264,7 +264,13 @@ class MetadataTypeParser {
 
         folderContentList.forEach((folderContentDirent) => {
 
-          console.log('getTypesFromFolder folderContentDirent: ', folderContentDirent);
+          // console.log('getTypesFromFolder folderContentDirent: ', folderContentDirent);
+
+          if (folderContentDirent.name.includes('-meta.xml')) {
+            const folderXMLFile = folderContentDirent.parentPath + '/' + folderContentDirent.name;
+            console.log('getTypesFromFolder folderXMLFile: ', folderXMLFile);
+          }
+
 
           // if (folderContent.name.includes('-meta.xml')) {
           //   console.log('getTypesFromFolder folderContent.name: ', folderContent.name);
