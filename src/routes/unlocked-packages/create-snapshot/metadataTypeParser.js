@@ -137,7 +137,8 @@ class MetadataTypeParser {
       Document: this.getTypesFromFolder,
       EscalationRule: this.getChildTypesFromCustomObject,
       // EmailFolder: this.getDefaultTypes,
-      EmailTemplate: this.getTypesFromFolder,
+      // EmailTemplate: this.getTypesFromFolder,
+      EmailTemplate: this.getFolderWithTypesFromFolder,
       FlexiPage: this.getDefaultTypes,
       Flow: this.getDefaultTypes,
       FlowDefinition: this.getDefaultTypes,
@@ -223,9 +224,9 @@ class MetadataTypeParser {
   }
 
   //  EmailTemplate
-  // getTypesFromFolderAndFolder() {
-
-  // }
+  getFolderWithTypesFromFolder(type, folderContentList, folderType) {
+    getTypesFromFolder(type, folderContentList, folderType);
+  }
 
   //Document, EmailTemplate, Report
   getTypesFromFolder(type, folderContentList, folderType) {
@@ -269,6 +270,8 @@ class MetadataTypeParser {
           if (folderContentDirent.name.includes('-meta.xml')) {
             const folderXMLFile = folderContentDirent.parentPath + '/' + folderContentDirent.name;
             console.log('getTypesFromFolder folderXMLFile: ', folderXMLFile);
+
+            //  starts with '<EmailFolder'
           }
 
 
