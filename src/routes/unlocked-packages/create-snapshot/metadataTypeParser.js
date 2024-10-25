@@ -246,6 +246,9 @@ class MetadataTypeParser {
         // const folderXMLFile = fs.readFileSync(`${componentFolderPath}.emailFolder-meta.xml`);
         // console.log('getTypesFromFolder folderXMLFile: ', folderXMLFile);
         // this.zip.addFile(`${folderType}/CustomLabels.labels`, full);
+
+        const folderComponentContentListTemp = fs.readdirSync(componentFolderPath, { withFileTypes: true });
+        console.log('---getTypesFromFolder folderComponentContentListTemp: ', folderComponentContentListTemp);
       }
 
 
