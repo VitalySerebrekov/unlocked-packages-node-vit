@@ -261,6 +261,14 @@ class MetadataTypeParser {
         // const folderTypePathTemp = `${this.projectPath}/${this.packageName}/${folderType}`;
         // const folderTypePathListTemp = fs.readdirSync(folderTypePathTemp, { withFileTypes: true });
         // console.log('---getTypesFromFolder folderTypePathListTemp: ', folderTypePathListTemp);
+
+        folderContentList.forEach((folderContent) => {
+          if (folderContent.name.includes('-meta.xml')) {
+            console.log('getTypesFromFolder folderContent.name: ', folderContent.name);
+            const folderXMLFile = folderContentList.parentPath + '/' + folderContentList.name;
+            console.log('getTypesFromFolder folderXMLFile: ', folderXMLFile);
+          }
+        });
       }
 
 
