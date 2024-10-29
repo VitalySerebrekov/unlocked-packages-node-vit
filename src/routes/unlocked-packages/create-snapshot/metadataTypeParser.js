@@ -221,12 +221,14 @@ class MetadataTypeParser {
 
   //  EmailTemplate (folders)
   getFolderWithTypesFromFolder(type, folderContentList, folderType) {
-    folderContentList.forEach((folderContentDirent) => {
-      if (folderContentDirent.name.includes('-meta.xml')) {
-        const folderXMLPath = `${this.projectPath}/${this.packageName}/${folderType}/${folderContentDirent.name}`;
-        this.zip.addLocalFile(`${folderXMLPath}`, `${folderType}`);   //  folder retrieved => new ZIP component
+
+    for (const content of folderContentList) {
+      if (!content.name.includes('-meta.xml')) {
+        continue;
       }
-    });
+      const folderXMLPath = `${this.projectPath}/${this.packageName}/${folderType}/${content.name}`;
+      this.zip.addLocalFile(`${folderXMLPath}`, `${folderType}`);   //  folder retrieved => new ZIP component
+    }
     this.getTypesFromFolder(type, folderContentList, folderType);
   }
 
