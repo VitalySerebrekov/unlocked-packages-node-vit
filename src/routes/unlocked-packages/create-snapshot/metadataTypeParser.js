@@ -227,7 +227,7 @@ class MetadataTypeParser {
         continue;
       }
       const folderXMLPath = `${this.projectPath}/${this.packageName}/${folderType}/${content.name}`;
-      this.zip.addLocalFile(`${folderXMLPath}`, `${folderType}`);   //  folder retrieved => new ZIP component
+      this.zip.addLocalFile(folderXMLPath, folderType);   //  folder retrieved => new ZIP component
     }
     this.getTypesFromFolder(type, folderContentList, folderType);
   }
