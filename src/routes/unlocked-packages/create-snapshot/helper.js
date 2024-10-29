@@ -127,9 +127,6 @@ function getComponentTypesFromPackageXML(projectPath, packageName, dependencyLis
           packageJSON.Package.types = [packageJSON.Package.types];
         }
 
-        // console.log('getComponentTypesFromPackageXML packageJSON1: ', packageJSON);
-        // log.log('getComponentTypesFromPackageXML packageJSON2: ', packageJSON);
-
         packageJSON.Package.types.forEach((type) => createComponents(packageMap, type, packName));
       }
 
@@ -144,8 +141,6 @@ function getComponentTypesFromPackageXML(projectPath, packageName, dependencyLis
 }
 
 function createComponents(packageTypeMap, type, packageName) {
-  // console.log('createComponents packageTypeMap: ', packageTypeMap);
-  // console.log('createComponents type: ', type);
   if (!packageTypeMap[packageName]) {
     packageTypeMap[packageName] = {};
   }

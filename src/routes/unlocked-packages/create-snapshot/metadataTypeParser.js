@@ -50,7 +50,6 @@ class MetadataTypeParser {
       EscalationRule: '<?xml version="1.0" encoding="UTF-8"?><EscalationRules xmlns="http://soap.sforce.com/2006/04/metadata">',
       MatchingRule: '<?xml version="1.0" encoding="UTF-8"?><MatchingRules xmlns="http://soap.sforce.com/2006/04/metadata">',
       ManagedTopic: '<?xml version="1.0" encoding="UTF-8"?><ManagedTopics xmlns="http://soap.sforce.com/2006/04/metadata">',
-      EmailFolder: '<?xml version="1.0" encoding="UTF-8"?><EmailFolder xmlns="http://soap.sforce.com/2006/04/metadata">',
       EmailTemplate: '<?xml version="1.0" encoding="UTF-8"?><EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">',
       Other: '<?xml version="1.0" encoding="UTF-8"?><CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">'
     };
@@ -63,7 +62,6 @@ class MetadataTypeParser {
       WebLink: 'CustomObject',
       RecordType: 'CustomObject',
       FieldSet: 'CustomObject',
-      EmailFolder: 'EmailTemplate',
       EmailTemplate: 'EmailTemplate',
       ValidationRule: 'CustomObject',
       BusinessProcess: 'CustomObject',
@@ -135,10 +133,7 @@ class MetadataTypeParser {
       CustomField: this.getChildTypesFromCustomObject,
       CompactLayout: this.getChildTypesFromCustomObject,
       Document: this.getTypesFromFolder,
-      // Document: this.getFolderWithTypesFromFolder,
       EscalationRule: this.getChildTypesFromCustomObject,
-      // EmailFolder: this.getDefaultTypes,
-      // EmailTemplate: this.getTypesFromFolder,
       EmailTemplate: this.getFolderWithTypesFromFolder,
       FlexiPage: this.getDefaultTypes,
       Flow: this.getDefaultTypes,
@@ -224,116 +219,34 @@ class MetadataTypeParser {
     return this.chunkList;
   }
 
-  //  EmailTemplate
+  //  EmailTemplate (folders)
   getFolderWithTypesFromFolder(type, folderContentList, folderType) {
-
-    const folderPath = `${this.projectPath}/${this.packageName}/${folderType}`;
-    // console.log('getFolderWithTypesFromFolder this.projectPath: ', this.projectPath);
-    // console.log('getFolderWithTypesFromFolder this.packageName: ', this.packageName);
-    // console.log('getFolderWithTypesFromFolder folderType: ', folderType);
-    console.log('getFolderWithTypesFromFolder folderPath: ', folderPath);
-
     folderContentList.forEach((folderContentDirent) => {
-
-      // console.log('getTypesFromFolder folderContentDirent: ', folderContentDirent);
-
       if (folderContentDirent.name.includes('-meta.xml')) {
-        const folderXMLPath = folderPath + '/' + folderContentDirent.name;
-        console.log('getFolderWithTypesFromFolder folderXMLPath: ', folderXMLPath);
-        // console.log('getFolderWithTypesFromFolder ${componentFolderPath}/${content.name}: ' + `${componentFolderPath}/${content.name}`);
-        // console.log('getFolderWithTypesFromFolder ${folderType}/${componentFolder}: ' + `${folderType}/${componentFolder}`);
-
-
-        //  create_snapshot_1729854153869/OCPAARobo1/email/SRAdvancedApprovalTemplateC2/SRAdvancedApprovalTemplateC21.email-meta.xml
-        //  email/SRAdvancedApprovalTemplateC2
-        this.zip.addLocalFile(`${folderXMLPath}`, `${folderType}`);   //  retrieved => new ZIP component
-        //  starts with '<EmailFolder'
+        const folderXMLPath = `${this.projectPath}/${this.packageName}/${folderType}/${folderContentDirent.name}`;
+        this.zip.addLocalFile(`${folderXMLPath}`, `${folderType}`);   //  folder retrieved => new ZIP component
       }
     });
-
     this.getTypesFromFolder(type, folderContentList, folderType);
   }
 
   //Document, EmailTemplate, Report
   getTypesFromFolder(type, folderContentList, folderType) {
-    console.log('getTypesFromFolder -------- start -------');
     const typePath = `${this.projectPath}/${this.packageName}/${folderType}`;
     type.componentList.forEach((component) => {
       const componentPathList = component.apiName.split('/');
       const componentFolder = componentPathList[0];
       const componentFile = componentPathList[1];
       const componentFolderPath = `${typePath}/${componentFolder}`
-
-      // console.log('getTypesFromFolder component: ', component);
-      // console.log('getTypesFromFolder component.apiName: ', component.apiName);
-      // console.log('getTypesFromFolder componentPathList: ', componentPathList);
-      // console.log('getTypesFromFolder componentFolder: ', componentFolder);
-      // console.log('getTypesFromFolder folderType: ', folderType);
-      // console.log('getTypesFromFolder componentFile: ', componentFile);
-      // console.log('getTypesFromFolder componentFolderPath: ', componentFolderPath);
-      // console.log('getTypesFromFolder folderContentList: ', folderContentList);
-
-      if (component.componentType === 'EmailTemplate') {
-        // const folderXML = componentFolderPath + '.emailFolder-meta.xml';
-        // console.log('getTypesFromFolder folderXML: ', folderXML);
-        // const folderXMLFile = fs.readFileSync(`${componentFolderPath}.emailFolder-meta.xml`);
-        // console.log('getTypesFromFolder folderXMLFile: ', folderXMLFile);
-        // this.zip.addFile(`${folderType}/CustomLabels.labels`, full);
-
-        //  remove last /SRAdvancedApprovalTemplateC2
-        //  remove last /SRAdvancedApprovalTemplateC1
-        // const folderComponentContentListTemp = fs.readdirSync(componentFolderPath, { withFileTypes: true });
-        // console.log('---getTypesFromFolder folderComponentContentListTemp: ', folderComponentContentListTemp);
-
-        // const folderTypePathTemp = `${this.projectPath}/${this.packageName}/${folderType}`;
-        // const folderTypePathListTemp = fs.readdirSync(folderTypePathTemp, { withFileTypes: true });
-        // console.log('---getTypesFromFolder folderTypePathListTemp: ', folderTypePathListTemp);
-
-        // folderContentList.forEach((folderContentDirent) => {
-
-        //   // console.log('getTypesFromFolder folderContentDirent: ', folderContentDirent);
-
-        //   if (folderContentDirent.name.includes('-meta.xml')) {
-        //     const folderXMLFile = folderContentDirent.parentPath + '/' + folderContentDirent.name;
-        //     console.log('getTypesFromFolder folderXMLFile: ', folderXMLFile);
-
-        //     //  starts with '<EmailFolder'
-        //   }
-
-
-          // if (folderContent.name.includes('-meta.xml')) {
-          //   console.log('getTypesFromFolder folderContent.name: ', folderContent.name);
-          //   const folderXMLFile = folderContentList.parentPath + '/' + folderContentList.name;
-          //   console.log('getTypesFromFolder folderXMLFile: ', folderXMLFile);
-          // }
-        // });
-      }
-
-
-      // console.log('getTypesFromFolder fs.existsSync(componentFolderPath): ', fs.existsSync(componentFolderPath));
       if (fs.existsSync(componentFolderPath)) {
         const folderComponentContentList = fs.readdirSync(componentFolderPath, { withFileTypes: true });
-
-        // console.log('getTypesFromFolder folderComponentContentList: ', folderComponentContentList);
-
         folderComponentContentList.forEach((content) => {
           if (`${componentFolder}/${content.name}`.includes(`${componentFile}.`)) {
-
-            // console.log('getTypesFromFolder componentFile5: ', componentFile);
-
             this.size += fs.statSync(`${componentFolderPath}/${content.name}`).size;
             this.zip.addLocalFile(`${componentFolderPath}/${content.name}`, `${folderType}/${componentFolder}`);
-            console.log('ZZZ: ' + `${componentFolderPath}/${content.name}`, `${folderType}/${componentFolder}`);
-            console.log('getTypesFromFolderAAA ${componentFolderPath}/${content.name}: ' + `${componentFolderPath}/${content.name}`);
-            console.log('getTypesFromFolderBBB ${folderType}/${componentFolder}: ' + `${folderType}/${componentFolder}`);
-
             if (!content.name.includes('-meta.xml')) {
               component.label = `${folderType}/${componentFolder}/${content.name}`;
-
-              console.log('getTypesFromFolder type.type1: ', type.type);
-
               if (type.type === 'Document') {
-                console.log('getTypesFromFolder type.type2: ', type.type);
                 component.apiName = `${componentFolder}/${content.name}`;
               }
               component.folder = componentFolder;
@@ -347,7 +260,6 @@ class MetadataTypeParser {
       delete component.isDirectory;
       delete component.fileList;
     });
-    console.log('getTypesFromFolder -------- end -------');
   }
 
   // ApexClass, ApexComponent, ApexPage, ApexTrigger, AppMenu, AuraDefinitionBundle,
