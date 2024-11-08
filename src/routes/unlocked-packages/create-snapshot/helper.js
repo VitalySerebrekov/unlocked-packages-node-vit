@@ -232,7 +232,7 @@ function mergeComponentsWithMetadataInfo(metadataInfoMap, packageMap, log) {
           }
         });
       });
-      console.log('mergeComponents packageMap: ', packageMap);
+      // console.log('mergeComponents packageMap: ', packageMap);
       resolve(packageMap);
       log.log('End Merge Components With MetadataInfo');
     } catch (e) {

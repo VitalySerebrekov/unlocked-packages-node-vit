@@ -296,34 +296,40 @@ class MetadataTypeParser {
       let count = 0;
       let folderList = [];
 
-      for (const content of folderContentList) {
-        if (!content.name.includes('-meta.xml')) {
+      for (const component of folderContentList) {
+        if (!component.name.includes('-meta.xml')) {
           continue;
         }
-        const folderXMLPath = `${this.projectPath}/${this.packageName}/${folderType}/${content.name}`;
+        const folderXMLPath = `${this.projectPath}/${this.packageName}/${folderType}/${component.name}`;
         this.zip.addLocalFile(folderXMLPath, folderType);   //  folder retrieved => new ZIP component
           count++;
       }
       if (count > 0) {
         this.log.log(`Component Type: ${this.folderTypeToComponentNameMap[folderType]}, count: ${count}`);
 
-        for (const content of folderContentList) {
-          if (!content.name.includes('-meta.xml')) {
+        for (const component of folderContentList) {
+          if (!component.name.includes('-meta.xml')) {
             continue;
           }
 
-          console.log('getFolderWith content: ', content);
-          console.log('getFolderWith content.type: ', content.type);
+          console.log('getFolderWith component1: ', component);
 
           let componentType = folderTypeName;
           console.log('getFolderWith componentType: ', componentType);
 
-          let label = folderType + '/' + content.name;
+          let label = folderType + '/' + component.name;
           console.log('getFolderWith label: ', label);
 
-          let apiName = (content.name).substring(0, (content.name).length - 9);
+          let apiName = (component.name).substring(0, (component.name).length - 9);
           console.log('getFolderWith apiName: ', apiName);
 
+          component.componentType = componentType;
+          component.label = label;
+          component.apiName = apiName;
+
+          console.log('getFolderWith component2: ', component);
+
+          this.componentList.push(component);
           // lastModifiedDate
           // lastModifiedBy
           // const folderXMLPath = `${this.projectPath}/${this.packageName}/${folderType}/${content.name}`;
