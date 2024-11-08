@@ -282,7 +282,6 @@ class MetadataTypeParser {
           }
         });
       }
-
       delete component.isDirectory;
       delete component.fileList;
     });
@@ -301,45 +300,49 @@ class MetadataTypeParser {
           continue;
         }
         const folderXMLPath = `${this.projectPath}/${this.packageName}/${folderType}/${component.name}`;
-        this.zip.addLocalFile(folderXMLPath, folderType);   //  folder retrieved => new ZIP component
-          count++;
+        this.zip.addLocalFile(folderXMLPath, folderType);   //  folderXML add to ZIP component
+        component.componentType = this.folderTypeToComponentNameMap[folderType];
+        component.label = `${folderType}/${component.name}`;
+        component.apiName = (component.name).substring(0, (component.name).length - 9);
+        this.componentList.push(component);   //  add folder definitions for Metadata_Item__c
+        count++;
       }
       if (count > 0) {
         this.log.log(`Component Type: ${this.folderTypeToComponentNameMap[folderType]}, count: ${count}`);
 
-        for (const component of folderContentList) {
-          if (!component.name.includes('-meta.xml')) {
-            continue;
-          }
+        // for (const component of folderContentList) {
+        //   if (!component.name.includes('-meta.xml')) {
+        //     continue;
+        //   }
 
-          // console.log('getFolderWith component1: ', component);
+        //   // console.log('getFolderWith component1: ', component);
 
-          // let componentType = folderTypeName;
-          // console.log('getFolderWith componentType: ', componentType);
+        //   // let componentType = folderTypeName;
+        //   // console.log('getFolderWith componentType: ', componentType);
 
-          // let label = folderType + '/' + component.name;
-          // console.log('getFolderWith label: ', label);
+        //   // let label = folderType + '/' + component.name;
+        //   // console.log('getFolderWith label: ', label);
 
-          // let apiName = (component.name).substring(0, (component.name).length - 9);
-          // console.log('getFolderWith apiName: ', apiName);
+        //   // let apiName = (component.name).substring(0, (component.name).length - 9);
+        //   // console.log('getFolderWith apiName: ', apiName);
 
-          // component.componentType = componentType;
-          // component.label = label;
-          // component.apiName = apiName;
+        //   // component.componentType = componentType;
+        //   // component.label = label;
+        //   // component.apiName = apiName;
 
-          component.componentType = this.folderTypeToComponentNameMap[folderType];
-          component.label = `${folderType}/${component.name}`;
-          component.apiName = (component.name).substring(0, (component.name).length - 9);
+        //   component.componentType = this.folderTypeToComponentNameMap[folderType];
+        //   component.label = `${folderType}/${component.name}`;
+        //   component.apiName = (component.name).substring(0, (component.name).length - 9);
 
-          console.log('getFolderWith component2: ', component);
+        //   console.log('getFolderWith component2: ', component);
 
-          this.componentList.push(component);
-          // lastModifiedDate
-          // lastModifiedBy
-          // const folderXMLPath = `${this.projectPath}/${this.packageName}/${folderType}/${content.name}`;
-          // let apiName = content.name;
+        //   this.componentList.push(component);
+        //   // lastModifiedDate
+        //   // lastModifiedBy
+        //   // const folderXMLPath = `${this.projectPath}/${this.packageName}/${folderType}/${content.name}`;
+        //   // let apiName = content.name;
 
-        }
+        // }
 
         // let snapshotComponentWrapper;
         // snapshotComponentWrapper.componentType = folderTypeName;
