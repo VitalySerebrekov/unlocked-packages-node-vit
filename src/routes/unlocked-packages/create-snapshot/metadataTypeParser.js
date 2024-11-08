@@ -128,13 +128,11 @@ class MetadataTypeParser {
       CustomMetadata: this.getDefaultTypes,
       CustomApplication: this.getDefaultTypes,
       CustomLabel: this.customLabelProcessor,
-      // CustomLabel: this.getDefaultTypes,
       // CustomLabels: this.customLabelProcessor,
       CustomField: this.getChildTypesFromCustomObject,
       CompactLayout: this.getChildTypesFromCustomObject,
       Document: this.getTypesFromFolder,
       EscalationRule: this.getChildTypesFromCustomObject,
-      // EmailTemplate: this.getFolderWithTypesFromFolder,
       EmailTemplate: this.getTypesFromFolder,
       FlexiPage: this.getDefaultTypes,
       Flow: this.getDefaultTypes,
@@ -225,36 +223,6 @@ class MetadataTypeParser {
     return this.chunkList;
   }
 
-  //  EmailTemplate (folders)
-  getFolderWithTypesFromFolder(type, folderContentList, folderType) {
-
-    // console.log('getFolderWith type: ', type);
-    // console.log('getFolderWith folderType: ', folderType);
-    // this.updateChunkList('CustomLabel');
-
-
-    let count = 0;
-    // let folderTypeName = 'Folder';
-
-    let folderTypeName = this.folderTypeToComponentNameMap[folderType];
-    console.log('getFolderWith folderTypeName: ', folderTypeName);
-
-    for (const content of folderContentList) {
-      if (!content.name.includes('-meta.xml')) {
-        continue;
-      }
-      const folderXMLPath = `${this.projectPath}/${this.packageName}/${folderType}/${content.name}`;
-      this.zip.addLocalFile(folderXMLPath, folderType);   //  folder retrieved => new ZIP component
-
-      count++;
-    }
-
-    // console.log('getFolderWith count: ', count);
-    this.log.log(`Component Type: ${folderTypeName}, count: ${count}`);
-
-    this.getTypesFromFolder(type, folderContentList, folderType);
-  }
-
   //Document, EmailTemplate + EmailFolder, Report
   getTypesFromFolder(type, folderContentList, folderType) {
     const typePath = `${this.projectPath}/${this.packageName}/${folderType}`;
@@ -286,29 +254,26 @@ class MetadataTypeParser {
       delete component.fileList;
     });
 
+    //  Case Number 00015775 (Unlocked package retrieval not pulling in emailtemplatefolder)
     if (!this.folderTypeToComponentNameMap[folderType]) {
       return;
     }
-    
-    // if (this.folderTypeToComponentNameMap[folderType]) {
-      let count = 0;
-      for (const component of folderContentList) {
-        if (!component.name.includes('-meta.xml')) {
-          continue;
-        }
-        const folderXMLPath = `${this.projectPath}/${this.packageName}/${folderType}/${component.name}`;
-        this.zip.addLocalFile(folderXMLPath, folderType);   //  folderXML add to ZIP component
-        component.componentType = this.folderTypeToComponentNameMap[folderType];
-        component.label = `${folderType}/${component.name}`;
-        component.apiName = (component.name).substring(0, (component.name).length - 9);
-        this.componentList.push(component);   //  add folder definitions for Metadata_Item__c
-        count++;
+    let count = 0;
+    for (const component of folderContentList) {
+      if (!component.name.includes('-meta.xml')) {
+        continue;
       }
-      if (count > 0) {
-        this.log.log(`Component Type: ${this.folderTypeToComponentNameMap[folderType]}, count: ${count}`);
-      }
-    // }
-
+      const folderXMLPath = `${this.projectPath}/${this.packageName}/${folderType}/${component.name}`;
+      this.zip.addLocalFile(folderXMLPath, folderType);   //  folderXML add to ZIP component
+      component.componentType = this.folderTypeToComponentNameMap[folderType];
+      component.label = `${folderType}/${component.name}`;
+      component.apiName = (component.name).substring(0, (component.name).length - 9);
+      this.componentList.push(component);   //  add folder definitions for Metadata_Item__c
+      count++;
+    }
+    if (count > 0) {
+      this.log.log(`Component Type: ${this.folderTypeToComponentNameMap[folderType]}, count: ${count}`);
+    }
   }
 
   // ApexClass, ApexComponent, ApexPage, ApexTrigger, AppMenu, AuraDefinitionBundle,
