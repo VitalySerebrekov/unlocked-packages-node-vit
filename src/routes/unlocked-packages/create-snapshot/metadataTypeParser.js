@@ -175,7 +175,12 @@ class MetadataTypeParser {
       WorkflowKnowledgePublish: this.getChildTypesFromCustomObject,
       WorkflowAlert: this.getChildTypesFromCustomObject,
       WorkflowRule: this.getChildTypesFromCustomObject
-    }
+    };
+
+    this.folderTypeToComponentName = {
+      email: 'EmailFolder'
+    };
+
   }
 
   init() {
@@ -222,9 +227,16 @@ class MetadataTypeParser {
   //  EmailTemplate (folders)
   getFolderWithTypesFromFolder(type, folderContentList, folderType) {
 
-    console.log('getFolderWith type: ', type);
-    console.log('getFolderWith folderType: ', folderType);
+    // console.log('getFolderWith type: ', type);
+    // console.log('getFolderWith folderType: ', folderType);
     // this.updateChunkList('CustomLabel');
+
+
+    let count = 0;
+    // let folderTypeName = 'Folder';
+
+    let folderTypeName = this.folderTypeToComponentName[folderType];
+    console.log('getFolderWith folderTypeName: ', folderTypeName);
 
     for (const content of folderContentList) {
       if (!content.name.includes('-meta.xml')) {
@@ -232,7 +244,12 @@ class MetadataTypeParser {
       }
       const folderXMLPath = `${this.projectPath}/${this.packageName}/${folderType}/${content.name}`;
       this.zip.addLocalFile(folderXMLPath, folderType);   //  folder retrieved => new ZIP component
+
+      count++;
     }
+
+    console.log('getFolderWith count: ', count);
+
     this.getTypesFromFolder(type, folderContentList, folderType);
   }
 
