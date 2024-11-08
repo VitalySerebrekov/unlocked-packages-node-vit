@@ -287,13 +287,13 @@ class MetadataTypeParser {
       delete component.fileList;
     });
 
-    let folderTypeName = this.folderTypeToComponentNameMap[folderType];
-    console.log('getTypesFromFolder folderTypeName: ', folderTypeName);
-
     if (this.folderTypeToComponentNameMap[folderType]) {
-    // if (this.folderTypeToComponentNameMap.has(folderType)) {
-      console.log('getTypesFromFolder Has ');
+
+      let folderTypeName = this.folderTypeToComponentNameMap[folderType];
+      console.log('getFolderWith folderTypeName: ', folderTypeName);
+
       let count = 0;
+      let folderList = [];
 
       for (const content of folderContentList) {
         if (!content.name.includes('-meta.xml')) {
@@ -301,18 +301,32 @@ class MetadataTypeParser {
         }
         const folderXMLPath = `${this.projectPath}/${this.packageName}/${folderType}/${content.name}`;
         this.zip.addLocalFile(folderXMLPath, folderType);   //  folder retrieved => new ZIP component
-  
-        count++;
+          count++;
       }
-
-
-      // console.log('getFolderWith count: ', count);
-
       if (count > 0) {
         this.log.log(`Component Type: ${this.folderTypeToComponentNameMap[folderType]}, count: ${count}`);
-      }
 
-      // this.log.log(`Component Type: ${this.folderTypeToComponentNameMap[folderType]}, count: ${count}`);
+        for (const content of folderContentList) {
+          if (!content.name.includes('-meta.xml')) {
+            continue;
+          }
+
+          console.log('getFolderWith content: ', content);
+
+          // const folderXMLPath = `${this.projectPath}/${this.packageName}/${folderType}/${content.name}`;
+          // let componentType = folderTypeName;
+          // let apiName = content.name;
+
+        }
+
+        // let snapshotComponentWrapper;
+        // snapshotComponentWrapper.componentType = folderTypeName;
+        // .apiName = 
+
+        // this.chunkList[this.chunkCounter].typeList.push({ componentList: this.componentList, type: type.type, zip: zipBuffer });
+        // this.chunkList[this.chunkCounter].typeList.push({ componentList: folderList, type: folderTypeName, zip :  this.zip.toBuffer().toString('base64') });
+
+      }
     }
 
   }
