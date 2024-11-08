@@ -237,7 +237,7 @@ class MetadataTypeParser {
     // let folderTypeName = 'Folder';
 
     let folderTypeName = this.folderTypeToComponentNameMap[folderType];
-    // console.log('getFolderWith folderTypeName: ', folderTypeName);
+    console.log('getFolderWith folderTypeName: ', folderTypeName);
 
     for (const content of folderContentList) {
       if (!content.name.includes('-meta.xml')) {
@@ -283,7 +283,11 @@ class MetadataTypeParser {
         });
       }
 
-      if (this.folderTypeToComponentNameMap.has(folderType)) {
+      let folderTypeName = this.folderTypeToComponentNameMap[folderType];
+      console.log('getTypesFromFolder folderTypeName: ', folderTypeName);
+
+      if (this.folderTypeToComponentNameMap[folderType]) {
+      // if (this.folderTypeToComponentNameMap.has(folderType)) {
         console.log('getTypesFromFolder Has ');
         let count = 0;
 
