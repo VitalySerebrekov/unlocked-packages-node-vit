@@ -312,6 +312,7 @@ class MetadataTypeParser {
           }
 
           console.log('getFolderWith content: ', content);
+          console.log('getFolderWith content.type: ', content.type);
 
           // const folderXMLPath = `${this.projectPath}/${this.packageName}/${folderType}/${content.name}`;
           // let componentType = folderTypeName;
