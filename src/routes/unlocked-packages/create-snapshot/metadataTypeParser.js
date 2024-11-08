@@ -134,7 +134,8 @@ class MetadataTypeParser {
       CompactLayout: this.getChildTypesFromCustomObject,
       Document: this.getTypesFromFolder,
       EscalationRule: this.getChildTypesFromCustomObject,
-      EmailTemplate: this.getFolderWithTypesFromFolder,
+      // EmailTemplate: this.getFolderWithTypesFromFolder,
+      EmailTemplate: this.getTypesFromFolder,
       FlexiPage: this.getDefaultTypes,
       Flow: this.getDefaultTypes,
       FlowDefinition: this.getDefaultTypes,
@@ -177,7 +178,7 @@ class MetadataTypeParser {
       WorkflowRule: this.getChildTypesFromCustomObject
     };
 
-    this.folderTypeToComponentName = {
+    this.folderTypeToComponentNameMap = {
       email: 'EmailFolder'
     };
 
@@ -214,7 +215,7 @@ class MetadataTypeParser {
       const zipBuffer = this.zip.toBuffer().toString('base64');
       if (zipBuffer !== 'UEsFBgAAAAAAAAAAAAAAAAAAAAAAAA==') {
         this.chunkList[this.chunkCounter].typeList.push({ componentList: this.componentList, type: type.type, zip: zipBuffer });
-        this.log.log(`Component Type1: ${type.type}, count: ${this.count}`);
+        this.log.log(`Component Type: ${type.type}, count: ${this.count}`);
       }
       this.zip = new AdmZip();
       this.componentList = [];
@@ -235,7 +236,7 @@ class MetadataTypeParser {
     let count = 0;
     // let folderTypeName = 'Folder';
 
-    let folderTypeName = this.folderTypeToComponentName[folderType];
+    let folderTypeName = this.folderTypeToComponentNameMap[folderType];
     // console.log('getFolderWith folderTypeName: ', folderTypeName);
 
     for (const content of folderContentList) {
@@ -249,12 +250,12 @@ class MetadataTypeParser {
     }
 
     // console.log('getFolderWith count: ', count);
-    this.log.log(`Component Type0: ${folderTypeName}, count: ${count}`);
+    this.log.log(`Component Type: ${folderTypeName}, count: ${count}`);
 
     this.getTypesFromFolder(type, folderContentList, folderType);
   }
 
-  //Document, EmailTemplate, Report
+  //Document, EmailTemplate + EmailFolder, Report
   getTypesFromFolder(type, folderContentList, folderType) {
     const typePath = `${this.projectPath}/${this.packageName}/${folderType}`;
     type.componentList.forEach((component) => {
@@ -281,6 +282,32 @@ class MetadataTypeParser {
           }
         });
       }
+
+      if (this.folderTypeToComponentNameMap.has(folderType)) {
+        console.log('getTypesFromFolder Has ');
+        let count = 0;
+
+        for (const content of folderContentList) {
+          if (!content.name.includes('-meta.xml')) {
+            continue;
+          }
+          const folderXMLPath = `${this.projectPath}/${this.packageName}/${folderType}/${content.name}`;
+          this.zip.addLocalFile(folderXMLPath, folderType);   //  folder retrieved => new ZIP component
+    
+          count++;
+        }
+
+
+        // console.log('getFolderWith count: ', count);
+
+        if (count > 0) {
+          this.log.log(`Component Type: ${this.folderTypeToComponentNameMap[folderType]}, count: ${count}`);
+        }
+
+        // this.log.log(`Component Type: ${this.folderTypeToComponentNameMap[folderType]}, count: ${count}`);
+      }
+
+
       delete component.isDirectory;
       delete component.fileList;
     });
@@ -466,7 +493,7 @@ class MetadataTypeParser {
 
   updateChunkList(type) {
     if (this.size > constants.MAX_SIZE_UNZIP_ATTACHMENT) {
-      this.log.log(`Component Type2: ${type.type}, count: ${this.count}`);
+      this.log.log(`Component Type: ${type.type}, count: ${this.count}`);
       this.chunkList[this.chunkCounter].typeList.push({ componentList: this.componentList, type: type.type, zip :  this.zip.toBuffer().toString('base64') });
       this.chunkList.push({ typeList: [] });
       this.zip = new AdmZip();
