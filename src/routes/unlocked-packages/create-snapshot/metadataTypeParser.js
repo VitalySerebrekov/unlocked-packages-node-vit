@@ -290,6 +290,7 @@ class MetadataTypeParser {
     if (this.folderTypeToComponentNameMap[folderType]) {
 
       let folderTypeName = this.folderTypeToComponentNameMap[folderType];
+      console.log('getFolderWith folderType: ', folderType);
       console.log('getFolderWith folderTypeName: ', folderTypeName);
 
       let count = 0;
@@ -314,8 +315,18 @@ class MetadataTypeParser {
           console.log('getFolderWith content: ', content);
           console.log('getFolderWith content.type: ', content.type);
 
+          let componentType = folderTypeName;
+          console.log('getFolderWith componentType: ', componentType);
+
+          let label = folderType + '/' + content.name;
+          console.log('getFolderWith label: ', label);
+
+          let apiName = (content.name).substring(0, (content.name).length - 9);
+          console.log('getFolderWith apiName: ', apiName);
+
+          // lastModifiedDate
+          // lastModifiedBy
           // const folderXMLPath = `${this.projectPath}/${this.packageName}/${folderType}/${content.name}`;
-          // let componentType = folderTypeName;
           // let apiName = content.name;
 
         }
