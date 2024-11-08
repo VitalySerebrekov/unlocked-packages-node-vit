@@ -222,6 +222,10 @@ class MetadataTypeParser {
   //  EmailTemplate (folders)
   getFolderWithTypesFromFolder(type, folderContentList, folderType) {
 
+    console.log('getFolderWith type: ', type);
+    console.log('getFolderWith folderType: ', folderType);
+    // this.updateChunkList('CustomLabel');
+
     for (const content of folderContentList) {
       if (!content.name.includes('-meta.xml')) {
         continue;
