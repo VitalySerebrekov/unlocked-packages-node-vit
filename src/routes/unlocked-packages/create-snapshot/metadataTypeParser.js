@@ -289,12 +289,12 @@ class MetadataTypeParser {
 
     if (this.folderTypeToComponentNameMap[folderType]) {
 
-      let folderTypeName = this.folderTypeToComponentNameMap[folderType];
-      console.log('getFolderWith folderType: ', folderType);
-      console.log('getFolderWith folderTypeName: ', folderTypeName);
+      // let folderTypeName = this.folderTypeToComponentNameMap[folderType];
+      // console.log('getFolderWith folderType: ', folderType);
+      // console.log('getFolderWith folderTypeName: ', folderTypeName);
 
       let count = 0;
-      let folderList = [];
+      // let folderList = [];
 
       for (const component of folderContentList) {
         if (!component.name.includes('-meta.xml')) {
@@ -312,20 +312,24 @@ class MetadataTypeParser {
             continue;
           }
 
-          console.log('getFolderWith component1: ', component);
+          // console.log('getFolderWith component1: ', component);
 
-          let componentType = folderTypeName;
-          console.log('getFolderWith componentType: ', componentType);
+          // let componentType = folderTypeName;
+          // console.log('getFolderWith componentType: ', componentType);
 
-          let label = folderType + '/' + component.name;
-          console.log('getFolderWith label: ', label);
+          // let label = folderType + '/' + component.name;
+          // console.log('getFolderWith label: ', label);
 
-          let apiName = (component.name).substring(0, (component.name).length - 9);
-          console.log('getFolderWith apiName: ', apiName);
+          // let apiName = (component.name).substring(0, (component.name).length - 9);
+          // console.log('getFolderWith apiName: ', apiName);
 
-          component.componentType = componentType;
-          component.label = label;
-          component.apiName = apiName;
+          // component.componentType = componentType;
+          // component.label = label;
+          // component.apiName = apiName;
+
+          component.componentType = this.folderTypeToComponentNameMap[folderType];
+          component.label = `${folderType}/${component.name}`;
+          component.apiName = (component.name).substring(0, (component.name).length - 9);
 
           console.log('getFolderWith component2: ', component);
 
