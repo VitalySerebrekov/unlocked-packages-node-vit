@@ -283,38 +283,38 @@ class MetadataTypeParser {
         });
       }
 
-      let folderTypeName = this.folderTypeToComponentNameMap[folderType];
-      console.log('getTypesFromFolder folderTypeName: ', folderTypeName);
-
-      if (this.folderTypeToComponentNameMap[folderType]) {
-      // if (this.folderTypeToComponentNameMap.has(folderType)) {
-        console.log('getTypesFromFolder Has ');
-        let count = 0;
-
-        for (const content of folderContentList) {
-          if (!content.name.includes('-meta.xml')) {
-            continue;
-          }
-          const folderXMLPath = `${this.projectPath}/${this.packageName}/${folderType}/${content.name}`;
-          this.zip.addLocalFile(folderXMLPath, folderType);   //  folder retrieved => new ZIP component
-    
-          count++;
-        }
-
-
-        // console.log('getFolderWith count: ', count);
-
-        if (count > 0) {
-          this.log.log(`Component Type: ${this.folderTypeToComponentNameMap[folderType]}, count: ${count}`);
-        }
-
-        // this.log.log(`Component Type: ${this.folderTypeToComponentNameMap[folderType]}, count: ${count}`);
-      }
-
-
       delete component.isDirectory;
       delete component.fileList;
     });
+
+    let folderTypeName = this.folderTypeToComponentNameMap[folderType];
+    console.log('getTypesFromFolder folderTypeName: ', folderTypeName);
+
+    if (this.folderTypeToComponentNameMap[folderType]) {
+    // if (this.folderTypeToComponentNameMap.has(folderType)) {
+      console.log('getTypesFromFolder Has ');
+      let count = 0;
+
+      for (const content of folderContentList) {
+        if (!content.name.includes('-meta.xml')) {
+          continue;
+        }
+        const folderXMLPath = `${this.projectPath}/${this.packageName}/${folderType}/${content.name}`;
+        this.zip.addLocalFile(folderXMLPath, folderType);   //  folder retrieved => new ZIP component
+  
+        count++;
+      }
+
+
+      // console.log('getFolderWith count: ', count);
+
+      if (count > 0) {
+        this.log.log(`Component Type: ${this.folderTypeToComponentNameMap[folderType]}, count: ${count}`);
+      }
+
+      // this.log.log(`Component Type: ${this.folderTypeToComponentNameMap[folderType]}, count: ${count}`);
+    }
+
   }
 
   // ApexClass, ApexComponent, ApexPage, ApexTrigger, AppMenu, AuraDefinitionBundle,
